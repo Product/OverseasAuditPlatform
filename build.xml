@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<project name="tonik integration" default="prepare" basedir=".">
+
+	<!-- Set up properties containing important project directories -->
+	<property name="source.dir" value="src"/>
+	<property name="test.dir" value="test" />
+	<property name="web.dir" value="web"/>
+	<property name="lib.dir" value="lib"/>
+	<property name="merge.dir" value="merge"/>
+	<property name="resource.dir" value="resource"/>
+
+	<property name="target.dir" value="target"/>
+	<property name="gen-src.dir" value="${target.dir}/gen-src"/>
+	<property name="meta-inf.dir" value="${target.dir}/meta-inf"/><!-- not be used for now.-->
+	<property name="schema.dir" value="${target.dir}/schema"/>
+	<property name="web-inf.dir" value="${web.dir}/WEB-INF"/>
+	<property name="web-lib.dir" value="${web-inf.dir}/lib"/>
+	<property name="class.dir" value="${web-inf.dir}/classes"/>
+	<property name="xdoclet.force" value="false"/>
+	<property name="app.name" value="TonikIntegration"/>
+
+	<property environment="env"/>
+	<property name="WAS" value="${env.WAS_HOME}"/><!-- not be used for now.-->
+
+	<!-- Set up the class path for compilation and execution -->
+	<path id="project.class.path">
+		<!-- Include our own classes, of course -->
+		<pathelement location="${class.dir}" />
+		<!-- Include jars in the project library directory -->
+		<fileset dir="${lib.dir}">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+
+	<!-- Create our runtime subdirectories and copy resources into them -->
+	<target name="prepare" description="Sets up build structures">
+		<delete dir="${target.dir}"/>
+		<mkdir dir="${target.dir}"/>
+		<mkdir dir="${gen-src.dir}"/>
+		<mkdir dir="${meta-inf.dir}"/>
+		<mkdir dir="${schema.dir}"/>
+
+		<delete dir="${web-inf.dir}"/>
+		<mkdir dir="${web-inf.dir}"/>
+		<mkdir dir="${class.dir}"/>
+		<mkdir dir="${lib.dir}"/>
+
+		<!-- Copy our property files and O/R mappings for use at runtime -->
+		<copy todir="${class.dir}">
+			<fileset dir="${resource.dir}">
+				<include name="**/*.properties" />
+				<include name="**/*.dsl" />
+				<include name="**/*.data" />
+				<include name="**/*.drl" />
+				<include name="**/*.xml" />
+				<include name="**/*.dat" />
+				<include name="**/*.txt" />	
+				<include name="**/*.xls" />	
+			</fileset>
+		</copy>
+
+		<copy todir="${web-lib.dir}">
+			<fileset dir="${lib.dir}">
+				<include name="*.jar" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- generate all the mapping files-->
+	<target name="gen-mapping"  depends="prepare" 
+          description="Generate all O/R mapping files">
+
+		<!-- Teach Ant how to use Hibernate's mapping file generation tool -->
+		<taskdef name="hibernatedoclet"
+             classname="xdoclet.modules.hibernate.HibernateDocletTask"
+             classpathref="project.class.path"/>
+
+		<hibernatedoclet destdir="${class.dir}"
+                  excludedtags="@version,@author,@todo" force="true" mergedir="${merge.dir}">
+			<fileset dir="${source.dir}">
+				<include name="**/*.java"/>
+			</fileset>
+			<hibernate version="3.0" />
+		</hibernatedoclet>
+	</target>
+
+	<!-- generate spring config files-->
+	<target name="spring-xdoclet" depends="gen-mapping" description="Generate deployment descriptors (run actionform to generate forms first)">
+
+		<taskdef name="springdoclet" classname="xdoclet.modules.spring.SpringDocletTask" classpathref="project.class.path" />
+
+		<springdoclet destDir="${class.dir}" mergedir="${merge.dir}" excludedtags="@version,@author,@todo" addedtags="@xdoclet-generated at ${TODAY},@copyright The XDoclet Team,@author XDoclet,@version ${version}" force="${xdoclet.force}" verbose="false">
+
+			<fileset dir="${source.dir}">
+				<include name="**/*.java" />
+			</fileset>
+
+			<fileset dir="${test.dir}">
+				<include name="**/*.java" />
+			</fileset>
+
+			<springxml xmlencoding="UTF-8" templateFile="${merge.dir}/spring_xml.xdt" destinationFile="applicationContext.xml"/>
+			
+		</springdoclet>
+	</target>
+
+	<!-- generate web config files-->
+	<target name="webdoclet" depends="spring-xdoclet" description="Generate deployment descriptors (run actionform to generate forms first)">
+
+		<taskdef name="webdoclet" classname="xdoclet.modules.web.WebDocletTask" classpathref="project.class.path" />
+
+		<webdoclet destdir="${gen-src.dir}" mergedir="${merge.dir}" excludedtags="@version,@author,@todo" addedtags="@xdoclet-generated at ${TODAY},@copyright The XDoclet Team,@author XDoclet,@version ${version}" force="${xdoclet.force}" verbose="false">
+
+			<fileset dir="${source.dir}">
+				<include name="**/*Servlet.java" />
+			</fileset>
+
+			<deploymentdescriptor servletspec="2.3" destdir="${web-inf.dir}">
+				<contextparam name="contextConfigLocation" value="/WEB-INF/classes/applicationContext.xml"/>
+				<contextparam name="log4jConfigLocation" value="/WEB-INF/classes/log4j.properties"/>
+			</deploymentdescriptor>
+
+			<webspherewebxml destDir="${web-inf.dir}"/>
+		</webdoclet>
+	</target>
+
+	<!-- Generate the schemas for all mapping files in our class tree -->
+	<target name="gen-schema" depends="webdoclet"
+          description="Generate DB schema from the O/R mapping files">
+
+		<!-- Teach Ant how to use Hibernate's schema generation tool -->
+		<taskdef name="schemaexport"
+             classname="org.hibernate.tool.hbm2ddl.SchemaExportTask"
+             classpathref="project.class.path"/>
+
+		<schemaexport properties="${class.dir}/hibernate.properties"
+                  quiet="no" text="no" drop="no" output="${schema.dir}/integration.sql" delimiter=";">
+			<fileset dir="${class.dir}">
+				<include name="**/*.hbm.xml"/>
+			</fileset>
+		</schemaexport>
+	</target>
+
+	<!-- Compile the java source of the project -->
+	<target name="compile" depends="gen-schema" description="Compiles all Java classes">
+		<javac encoding="UTF-8" srcdir="${source.dir};${test.dir};${gen-src.dir}" destdir="${class.dir}" debug="on" optimize="off" deprecation="on">
+			<classpath refid="project.class.path" />
+		</javac>
+	</target>
+	
+	<!-- Compile the java source of the project -->
+	<target name="compile-alone" depends="webdoclet" description="Compiles all Java classes">
+		<javac encoding="UTF-8" srcdir="${source.dir};${test.dir};${gen-src.dir}" destdir="${class.dir}" debug="on" optimize="off" deprecation="on" includeantruntime="on">
+			<classpath refid="project.class.path"/>
+		</javac>
+	</target>
+
+	<!--Make War-file without regenerate db and sql -->
+	<target name="war-alone" depends="compile-alone">
+		<war warfile="${target.dir}/${app.name}.war"
+	            webxml="${web-inf.dir}/web.xml">
+			<fileset dir="${web.dir}" excludes="**/web.xml" >
+				<include name="**/*.*"/>
+			</fileset>
+		</war>
+	</target>
+
+	<!--Make War-file -->
+	<target name="war" depends="compile">
+		<war warfile="${target.dir}/${app.name}.war"
+	            webxml="${web-inf.dir}/web.xml">
+			<fileset dir="${web.dir}" excludes="**/web.xml" >
+				<include name="**/*.*"/>
+			</fileset>
+		</war>
+	</target>
+
+	<target name="clean" description="clean up">
+		<delete dir="${target.dir}" />
+		<delete dir="${web-inf.dir}"/>
+	</target>
+
+</project>

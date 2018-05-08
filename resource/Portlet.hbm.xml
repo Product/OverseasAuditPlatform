@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="com.thinvent.rules.dao.businesslayer.Portlet"
+    table="portlets"
+>
+		<cache usage="read-write"/>
+    <id
+        name="portletid"
+        type="java.lang.String"
+        column="portletid"
+    >
+        <generator class="assigned" />
+    </id>
+
+    <property
+        name="portletname"
+        type="java.lang.String"
+        column="portletname"
+        length="100"
+    />
+
+    <!-- Associations -->
+  
+    <!-- bi-directional one-to-many association to Portletmode -->
+    <set
+        name="portletmodes"
+        lazy="true"
+        inverse="true"
+		cascade="none"
+    >
+        <key>
+            <column name="portletid" />
+        </key>
+        <one-to-many 
+            class="com.thinvent.rules.dao.businesslayer.Portletmode"
+        />
+    </set>
+
+</class>
+</hibernate-mapping>

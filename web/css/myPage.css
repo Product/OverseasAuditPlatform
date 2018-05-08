@@ -1,0 +1,217 @@
+﻿body{font-size:12px; color:#000;font-family: 宋体, Arial, Helvetica, Verdana, sans-serif;}
+        div,body,ul,li,table,tr,td,p{margin:0; padding:0; border:0; list-style:none;}
+       /* .divToolBar {height: 43px;padding-top:5px; background-color: #F7F7F7; border: 1px solid #ccc; float:right;}*/
+        a, a:link { text-decoration: none; color:Blue;  }
+        a:visited {  }
+        a:active{ text-decoration: none;  }
+        a:hover { text-decoration:underline;cursor:pointer;} 
+        a:focus { outline: none; }
+        .clr{ clear:both; overflow:hidden;}
+        .display_block{ display:block;}
+        .display_none{ display:none;}
+        
+        .divToolBar {height:37px; padding-top:3px; background-color: #FFF0B4; border: 1px solid #ccc; border-top:0px; border-right:0px;  float:right; position:absolute; top:0px; right:0px;}
+        .divToolBar a,.divToolBar a:link, .divToolBar a:visited{display:block;color:#000;  height:20px; line-height:20px; text-align:center; float:left; background:url(../images/application_add.png) no-repeat center 0px; text-decoration:none; padding:16px 10px 0px 10px; margin:0px; }
+        .divToolBar a:hover{display:block; height:20px; line-height:20px;color:#11f;  text-align:center; float:left; background:url(../images/application_add.png) no-repeat center 0px;   text-decoration:underline;padding:16px 10px 0px 10px;}
+        .divToolBar .splitLine{float: left; display: block; height: 43px; background:url(../images/bg1_line.gif) no-repeat center top; width:1px; margin:0 5px; padding-top:0px; background-color: #fff; border: 1px solid #ccc; padding-top:5px;  margin-top:2px; position:relative;}
+        .divSearch table{width:100%;}
+        .divSearch table td{ height:36px;}
+        .divSearch Input[type="text"]{border: 1px solid #006cb5;BACKGROUND-COLOR: #ffffff; color:#000000;cursor: hand; width:125px;}
+        .divSearch select{border: 1px solid #006cb5;BACKGROUND-COLOR: #ffffff; color:#000000;cursor: hand;}
+                
+         /*=============*/
+        .divDatagrid { overflow:auto;background-color: #fff;  margin-top:2px;}
+        .pTitle{height: 42px; float:left; padding-left:40px; line-height:40px; background:#F7F7F7 url(../images/fangdj.png) no-repeat 5px center; border-bottom:1px solid #ccc;}
+        
+        /***************table表格样式************************/
+        .mytable{width: 100%;border-collapse: collapse;table-layout:auto;_table-layout:fixed;}/*固定列宽 table-layout:fixed;*/
+        .mytable td,.mytable th{text-align:center;border: 1px solid #ccc; height:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:2px;}
+        .mytable .remLeftBorder{ border-left:0px;}
+        .mytable .remRightBorder{ border-right:0px;}
+        .mytable .remLeftBorder img{ width:23px; height:23px; cursor:pointer; margin-right:5px;}
+        
+        
+        #tablePrint{width: 100%;  margin-bottom:5px;}
+        #tablePrint,#tablePrint th,#tablePrint td{border:1px solid #ccc;border-collapse:collapse; padding:2px;}
+        .mytable .th {line-height:28px;color:#fff; border-collapse:collapse; background:#486197 url(../images/th_bg.jpg) repeat-x center center; }
+        .mytable .tdFirst{ background-color:#F7F7F7; text-align:center;}
+        /*=================*/
+        
+        #divPageIndex {border:0; padding:0; position:absolute; bottom:10px; margin:0 auto;}
+        #divPageIndex a{border:0; padding:0;}
+        #AspNetPager1{ float:left; padding-left:5px;}
+        #AspNetPager1 select{ margin-top :5px; width:60px;white-space: nowrap; }
+        #AspNetPager1 a{display:block;height:20px;line-height:20px;text-decoration:none;padding:0 10px; margin-left:5px; _width:1px;white-space: nowrap; color:#000;}
+        #AspNetPager1 span{display:block;  height:20px; line-height:20px;min-width:32px; text-align:center;  float:left; border:1px solid #ccc; margin:5px; margin-left:0px; }
+        #AspNetPager1 span:hover{float:left; border:1px solid #000; cursor:pointer; }
+        .pTotalRecords{ float:left;  height:22px; line-height:22px;  padding-left:5px; }
+        .pTotalRecords select{width:60px;white-space: nowrap;margin-top :5px;  }
+        .spanRed{color:red; padding:0 3px;}
+        
+        /***************EditPage using************************/
+         .tab
+        {
+            font-size: 12px;_table-layout:fixed;
+        }
+        .tab td
+        {
+            height: 25px;
+            border-bottom: 1px dotted #ccc;
+        }
+        Input[type="text"]
+        {
+            border: 1px solid #006cb5;
+            background-color: #ffffff;
+            color: #000000;
+            cursor: hand;
+            margin-left:2px;
+            margin-right:2px;
+        }
+        .tab input{ _border: expression((this.type=='text'||this.type=='password'||this.type=='file') ? "1px solid #006cb5" : "0" ); 
+                _margin-left:2px;
+                _margin-right:2px; } /* 兼容IE6 */
+        textarea
+        {
+          resize:none;
+          border: 1px solid #006cb5; 
+          _padding:3px;
+        }   
+        select
+        {
+            _border-color:tomato; /*For IE6-*/
+            _filter:chroma(color=tomato);/*For IE6-*/ 
+            border: 1px solid #006cb5;
+            background-color: #ffffff;
+            color: #000000;
+            cursor: hand;
+            margin-left:2px;
+            margin-right:2px;
+            width: 151px;
+            white-space: nowrap;
+        }
+         input[type="button"], input[type="submit"],button{ cursor:pointer;padding:1px 6px;text-align: center;  *padding:1px 6px; *height:2em;  font-family: Tahoma, Arial/9; width:auto; overflow:visible; *width:1; color: #333; border: solid 1px #999; border-radius: 2px;  box-shadow: 0 1px 0 rgba(255, 255, 255, .7),  0 -1px 0 rgba(0, 0, 0, .09); -moz-transition:-moz-box-shadow linear .2s; -webkit-transition: -webkit-box-shadow linear .2s; transition: box-shadow linear .2s; }
+         input[type="button"]:hover ,input[type="submit"]:hover,button:hover { color:#000; border-color:#666; }
+         input[type="button"][disabled] ,input[type="submit"][disabled],button[disabled] { cursor:default; color:#666;border: solid 1px #999; filter:alpha(opacity=50); opacity:.5; box-shadow:none; }
+         input[type="button"]:active,input[type="submit"]:active,button:active{ border-color:#666!important; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#DDDDDD', endColorstr='#FFFFFF'); background: linear-gradient(top, #DDD, #FFF); background: -moz-linear-gradient(top, #DDD, #FFF); background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#DDD), to(#FFF)); box-shadow:inset 0 1px 5px rgba(66, 109, 201, .9), inset 0 1px 1em rgba(0, 0, 0, .3); }
+         input{_padding:1px!important;_width:auto; overflow:visible; _width:1;}
+        
+        .mySearch{}
+        .mySearch td{ height:25px;}
+        
+         .artDialogBtn{position:absolute; bottom:0px; padding:5px 0px;  width:100%;text-align:right; white-space:nowrap;background-color:#F6F6F6; border-top:solid 1px #DADEE5;}
+        .mybutton,.mysubmit{margin-right:15px; padding: 6px 8px!important; cursor: pointer; display: inline-block; text-align: center; line-height: 1; *padding:4px 10px; *height:2em; letter-spacing:2px; font-family: Tahoma, Arial/9!important; width:auto; overflow:visible; *width:1; color: #333; border: solid 1px #999!important; border-radius: 5px!important; background: #DDD; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#DDDDDD'); background: linear-gradient(top, #FFF, #DDD); background: -moz-linear-gradient(top, #FFF, #DDD); background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFF), to(#DDD));  box-shadow: 0 1px 0 rgba(255, 255, 255, .7),  0 -1px 0 rgba(0, 0, 0, .09); -moz-transition:-moz-box-shadow linear .2s; -webkit-transition: -webkit-box-shadow linear .2s; transition: box-shadow linear .2s; }
+        .mybutton:-moz-focus-inner,.mysubmit:-moz-focus-inner{ border:0; padding:0; margin:0; }
+        .mybutton:focus,.mysubmit:focus { outline:none 0!important; border-color:#426DC9!important; box-shadow:0 0 8px rgba(66, 109, 201, .9); }
+        .mybutton:hover,.mysubmit:hover { color:#000!important; border-color:#666!important; }
+        .mybutton:active,.mysubmit:active{ border-color:#666!important; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#DDDDDD', endColorstr='#FFFFFF'); background: linear-gradient(top, #DDD, #FFF); background: -moz-linear-gradient(top, #DDD, #FFF); background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#DDD), to(#FFF)); box-shadow:inset 0 1px 5px rgba(66, 109, 201, .9), inset 0 1px 1em rgba(0, 0, 0, .3); }
+        .mybutton[disabled],.mysubmit[disabled] { cursor:default; color:#666; background:#DDD; border: solid 1px #999; filter:alpha(opacity=50); opacity:.5; box-shadow:none; }
+        .mysubmit{ color: #FFF!important; border: solid 1px #1c6a9e!important; background: #2288cc!important; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#33bbee', endColorstr='#2288cc'); background: linear-gradient(top, #33bbee, #2288cc)!important; background: -moz-linear-gradient(top, #33bbee, #2288cc)!important; background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#33bbee), to(#2288cc))!important;}
+        .mysubmit:hover { color:#FFF!important; border-color:#0F3A56!important; }
+        .mysubmit:active { border-color:#1c6a9e!important; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#33bbee', endColorstr='#2288cc'); background: linear-gradient(top, #33bbee, #2288cc); background: -moz-linear-gradient(top, #33bbee, #2288cc); background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#33bbee), to(#2288cc)); }
+
+        
+        .table_line
+        {
+            border-right: none;
+            background: #fff;
+            margin-bottom: 10px;
+        }
+        .table_line td, .table_line th
+        {
+            padding: 5px;
+            font-size: 12px;
+        }
+        .table_line td
+        {
+            border-bottom: 1px dotted #ccc;
+        }
+        .trEven
+        {
+            background-color: #ebeaea;
+        }
+        .inputTextFocus
+        {
+            color: #ccf;
+        }
+        .inputDate{ width:80px;}
+        
+        /*选择器具操作按钮*/
+        .chooseBtn{height:30px; line-height:30px; padding-left:55px;border: 1px solid #ccc;}
+        /*底部操作按钮*/
+        .operationBtn{margin-top: 10px; margin-bottom: 10px; padding-left: 106px;}
+        
+        /*编辑时掩藏公司代号 使用*/
+        .trcCodeDisplayStatus{ display:none;}
+        .tdRight_Title{text-align:right;white-space: nowrap; width:100px;min-width:100px;}
+        .tdLeft_Input{text-align:left;white-space: nowrap; width:165px;min-width:165px;}
+        .tdLeft_Input textarea{ margin-left:2px;margin-right:2px;}
+        .trFlag{ background-color:#1E71B1;}
+        .trFlag td{ font-size:5px; height:5px; overflow:hidden;}
+        
+        
+        
+        /***************选项卡************************/
+        .ui-tabs-nav
+        {
+            /*导航容器定义*/
+            height: 30px;
+            padding-left: 5px;
+            background-color: #1E71B1;
+        }
+        .ui-tabs-title
+        {
+            float:left;
+            font-size: 12px;
+            height: 12px;
+            padding: 5px 10px;
+            margin-top: 6px;
+            margin-right: 6px;
+            color:#fffe7d; 
+            font-weight:bold;
+        }
+        .ui-tabs-nav li
+        {
+            /*默认标签样式*/
+            float: left;
+            font-size: 12px;
+            padding: 5px 10px;
+            height: 12px;
+            line-height: 12px;
+            margin-top: 6px;
+            margin-right: 6px;
+            color: #555555;
+            background-color: #ccc;
+            cursor: pointer;
+            border: 1px solid #ccc;
+        }
+        .ui-tabs-nav li.ui-tabs-selected
+        {
+            /*激活的标签样式*/
+            color: #000;
+            cursor: text;
+            border: 1px solid #fff;
+            background-color: #fff;
+        }
+        .ui-tabs-panel
+        {
+            width:100%;
+            /*默认的显示区域样式*/
+        }
+        .ui-tabs-hide
+        {
+            display: none;
+        }
+        
+        
+        .red{ color:Red;}
+        
+        /*****  yangbo Add ********/
+fieldset{ margin-bottom:10px; border:2px solid #3399CC; }
+fieldset.fieldset_first{ margin-bottom:10px; border:2px solid #3399CC; margin-top:5px; }
+legend{ background-color:#009933; color:#FFFFFF; padding:5px; font-weight:bold;}
+
+.legend1{background-color:#f0ad4e; color:#000; padding:5px; font-weight:bold;}
+.legend2{background-color:#BFEA97; color:#000; padding:5px; font-weight:bold;}
+.legend2 span{ font-weight:normal;}
+.legend3{background-color:#d9534f; color:#fff; padding:5px; font-weight:bold;}
+/*****  yangbo Add End ********/

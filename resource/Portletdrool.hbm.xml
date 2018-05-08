@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="com.thinvent.rules.dao.businesslayer.Portletdrool"
+    table="portletdrools"
+>
+		<!-- 
+		<cache usage="read-write"/>
+		-->
+    <composite-id name="comp_id" class="com.thinvent.rules.dao.businesslayer.PortletdroolPK">
+        <key-property 
+            name="country" 
+            column="country" 
+            type="java.lang.String"
+            length="2"
+        />
+        <key-property 
+            name="portletid" 
+            column="portletid" 
+            type="java.lang.String"
+            length="20"
+        />
+        <key-property 
+            name="portletmodeid" 
+            column="portletmodeid" 
+            type="java.lang.String"
+            length="10"
+        />
+        <key-property 
+            name="sequence" 
+            column="sequence" 
+            type="java.lang.Integer"
+            length="10"
+        />
+    </composite-id>    
+
+    <property
+        name="drl"
+        type="text"
+        column="drl"
+        not-null="true"
+        length="1073741823"
+    />
+    <property
+        name="dsl"
+        type="text"
+        column="dsl"
+        length="1073741823"
+    />
+    <property
+        name="droolpackage"
+        type="com.thinvent.common.hibernate.type.BinaryBlobType"
+        column="package"
+        length="2147483647"
+    />
+
+    <!-- Associations -->
+    <!-- derived association(s) for compound key -->
+    <!-- bi-directional many-to-one association to Portletmode -->
+    <many-to-one
+        name="portletmode"
+	    class="com.thinvent.rules.dao.businesslayer.Portletmode"
+	    update="false"
+	    insert="false"
+	>
+    	<column name="portletid" />
+    	<column name="portletmodeid" />
+	</many-to-one>
+	
+    <!-- end of derived association(s) -->
+  
+
+</class>
+</hibernate-mapping>

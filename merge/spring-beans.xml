@@ -1,0 +1,300 @@
+
+<import resource="classpath:META-INF/cxf/cxf.xml" />
+<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+<jaxws:endpoint id="websiteService" implementor="com.tonik.webservice.WebsiteService"
+	address="/WebsiteService" />
+
+<jaxws:endpoint id="productService" implementor="com.tonik.webservice.ProductService"
+	address="/ProductService" />
+
+<bean class="com.thinvent.utils.SpringContextUtil" lazy-init="false" />
+
+<!-- The JDBC data source. -->
+<bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource"
+	destroy-method="close">
+	<property name="driverClassName">
+		<value>net.sourceforge.jtds.jdbc.Driver</value>
+	</property>
+
+	<!-- tomcat8 只用DBCP2,不能与jtds一起使用,该参数使DBCP2不调用net.sourceforge.jtds.jdbc.JtdsConnection.isValid方法 -->
+	<property name="validationQuery" value="select 1" />
+
+	<property name="url">
+		<value>jdbc:jtds:sqlserver://192.168.64.18/OVERSEAS_DEV</value>
+	</property>
+	<property name="username">
+		<value>dev</value>
+	</property>
+	<property name="password">
+		<value>dev</value>
+	</property>
+	<property name="initialSize">
+		<value>3</value>
+	</property>
+	<property name="maxTotal">
+		<value>100</value>
+	</property>
+
+	<property name="maxIdle">
+		<value>3</value>
+	</property>
+</bean>
+
+<!-- The Hibernate session factory. -->
+<bean id="sessionFactory"
+	class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+	<property name="dataSource">
+		<ref bean="dataSource" />
+	</property>
+	<property name="mappingResources">
+		<list>
+			<value>com/tonik/model/Area.hbm.xml</value>
+			<value>com/tonik/model/Article.hbm.xml</value>
+			<value>com/tonik/model/ArticleEvent.hbm.xml</value>
+			<value>com/tonik/model/Brand.hbm.xml</value>
+			<value>com/tonik/model/Consultive.hbm.xml</value>
+			<value>com/tonik/model/Country.hbm.xml</value>
+			<value>com/tonik/model/DetectingSuggest.hbm.xml</value>
+			<value>com/tonik/model/DetectingEvent.hbm.xml</value>
+			<value>com/tonik/model/DetectingRecord.hbm.xml</value>
+			<value>com/tonik/model/DetectingEvaluation.hbm.xml</value>
+			<value>com/tonik/model/DRLFile.hbm.xml</value>
+			<value>com/tonik/model/Email.hbm.xml</value>
+			<value>com/tonik/model/EmailGroup.hbm.xml</value>
+			<value>com/tonik/model/Epidemic.hbm.xml</value>
+			<value>com/tonik/model/Evaluation.hbm.xml</value>
+			<value>com/tonik/model/EvaluationIndex.hbm.xml</value>
+			<value>com/tonik/model/EvaluationStyle.hbm.xml</value>
+			<value>com/tonik/model/EvaluationType.hbm.xml</value>
+			<value>com/tonik/model/Event.hbm.xml</value>
+			<value>com/tonik/model/EventType.hbm.xml</value>
+			<value>com/tonik/model/EventAffectedArea.hbm.xml</value>
+			<value>com/tonik/model/EventAffectedBrand.hbm.xml</value>
+			<value>com/tonik/model/EventAffectedMaterial.hbm.xml</value>
+			<value>com/tonik/model/EventAffectedProductType.hbm.xml</value>
+			<value>com/tonik/model/EventAffectedWebsite.hbm.xml</value>
+			<value>com/tonik/model/Extraction.hbm.xml</value>
+			<value>com/tonik/model/KeyWord.hbm.xml</value>
+			<value>com/tonik/model/Match.hbm.xml</value>
+			<value>com/tonik/model/Material.hbm.xml</value>
+			<value>com/tonik/model/MaterialType.hbm.xml</value>
+			<value>com/tonik/model/Menu.hbm.xml</value>
+			<value>com/tonik/model/MismatchProduct.hbm.xml</value>
+			<value>com/tonik/model/PointOfTime.hbm.xml</value>
+			<value>com/tonik/model/Product.hbm.xml</value>
+			<value>com/tonik/model/ProductDefinition.hbm.xml</value>
+			<value>com/tonik/model/ProductStyle.hbm.xml</value>
+			<value>com/tonik/model/ProductType.hbm.xml</value>
+			<value>com/tonik/model/ProductPropertyType.hbm.xml</value>
+			<value>com/tonik/model/Region.hbm.xml</value>
+			<value>com/tonik/model/RelProductMaterial.hbm.xml</value>
+			<value>com/tonik/model/Report.hbm.xml</value>
+			<value>com/tonik/model/ReportTemplate.hbm.xml</value>
+			<value>com/tonik/model/RoleMenu.hbm.xml</value>
+			<value>com/tonik/model/Rules.hbm.xml</value>
+			<value>com/tonik/model/RulesDetail.hbm.xml</value>
+			<value>com/tonik/model/SpringQTZ.hbm.xml</value>
+			<value>com/tonik/model/State.hbm.xml</value>
+			<value>com/tonik/model/Standard.hbm.xml</value>
+			<value>com/tonik/model/UserInfo.hbm.xml</value>
+			<value>com/tonik/model/VentureAnalysis.hbm.xml</value>
+			<value>com/tonik/model/VentureAnalysisStyle.hbm.xml</value>
+			<value>com/tonik/model/Website.hbm.xml</value>
+			<value>com/tonik/model/WebsiteStyle.hbm.xml</value>
+			<value>com/tonik/model/TestStyle.hbm.xml</value>
+			<value>com/tonik/model/Test.hbm.xml</value>
+			<value>com/tonik/model/TestTarget.hbm.xml</value>
+			<value>com/tonik/model/InfoDiffusion.hbm.xml</value>
+			<value>com/tonik/model/CollectorCfg.hbm.xml</value>
+			<value>com/tonik/model/ThirdReport.hbm.xml</value>
+			<value>com/tonik/model/ExpertRepository.hbm.xml</value>
+			<value>com/tonik/model/EvaluationManagement.hbm.xml</value>
+			<value>com/tonik/model/ProductFeature.hbm.xml</value>
+			<value>com/tonik/model/ProductTrivialName.hbm.xml</value>
+			<value>com/tonik/model/ChattingMessage.hbm.xml</value>
+			<value>com/tonik/model/CollectorCfgCommodity.hbm.xml</value>
+			<value>com/tonik/model/RelProductTypeStyle.hbm.xml</value>
+			<value>com/tonik/model/RelEvaluationProduct.hbm.xml</value>
+			<value>com/tonik/model/Feature.hbm.xml</value>
+			<value>com/tonik/model/ThirdProductType.hbm.xml</value>
+			<value>com/tonik/model/ThirdWebsite.hbm.xml</value>
+			<value>com/tonik/model/EvaluationTree.hbm.xml</value>
+			<value>com/tonik/model/StreamConf.hbm.xml</value>
+			<value>Portletdrool.hbm.xml</value>
+			<value>Portlet.hbm.xml</value>
+			<value>Portletmode.hbm.xml</value>
+		</list>
+	</property>
+	<property name="hibernateProperties">
+		<props>
+			<prop key="hibernate.dialect">
+				org.hibernate.dialect.SQLServerDialect
+			</prop>
+			<prop key="hibernate.show_sql">false</prop>
+			<prop key="hibernate.format_sql">false</prop>
+		</props>
+	</property>
+</bean>
+
+<bean id="DroolsDeployer" class="com.thinvent.common.util.rule.DroolsDeployer">
+	<constructor-arg index="0">
+		<list>
+			<bean id="rule1" class="com.thinvent.common.util.rule.RuleFileDefinition">
+				<property name="country" value="*" />
+				<property name="portlet" value="products" />
+				<property name="mode" value="standard_val" />
+				<property name="sequence" value="1" />
+				<property name="drlfile" value="products-standard_val-1.drl" />
+				<property name="dslfile" value="products-standard_val-1.dsl" />
+			</bean>
+		</list>
+	</constructor-arg>
+	<!-- This is the drools processed reference -->
+	<constructor-arg index="1" ref="RulesProcessorLookup" />
+</bean>
+
+<!--bean id="RulesProcessorLookup" class="org.springframework.jndi.JndiObjectFactoryBean"> 
+	<property name="jndiName" value="service/RulesProcessor"/> <property name="lookupOnStartup" 
+	value="true"/> </bean -->
+<bean id="RulesProcessorLookup"
+	class="com.thinvent.rules.business.drools.PortletDroolsProcessor">
+	<!-- property name="facade">
+		<ref bean="PortletDroolsFacade" />
+	</property-->
+</bean>
+<!--bean id="ruleSessionFactory" class="org.springframework.jndi.JndiObjectFactoryBean" 
+	lazy-init="true"> <property name="jndiName"> <value>java:/hibernate/ruleSessionFactory</value> 
+	</property> </bean -->
+<bean id="PortletDroolsFacade" class="com.thinvent.rules.dao.facade.DAOFacade">
+	<property name="portletdrooldao">
+		<ref bean="PortletdroolDAO" />
+	</property>
+	<property name="portletdao">
+		<ref bean="PortletDAO" />
+	</property>
+	<property name="portletmodedao">
+		<ref bean="PortletmodeDAO" />
+	</property>
+</bean>
+<bean id="PortletDAO" class="com.thinvent.rules.dao.broker.hibernate.PortletDAO">
+	<property name="sessionFactory">
+		<ref bean="sessionFactory" />
+	</property>
+</bean>
+
+<bean id="PortletmodeDAO" class="com.thinvent.rules.dao.broker.hibernate.PortletmodeDAO">
+	<property name="sessionFactory">
+		<ref bean="sessionFactory" />
+	</property>
+</bean>
+
+<bean id="PortletdroolDAO" class="com.thinvent.rules.dao.broker.hibernate.PortletdroolDAO">
+	<property name="sessionFactory">
+		<ref bean="sessionFactory" />
+	</property>
+</bean>
+
+<!-- Transaction manager for a single Hibernate SessionFactory (alternative 
+	to JTA) -->
+<bean id="transactionManager"
+	class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+	<property name="sessionFactory">
+		<ref local="sessionFactory" />
+	</property>
+</bean>
+
+<!--Base Transaction Mananger -->
+<bean id="BaseTransactionManager" abstract="true"
+	class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+	<property name="transactionManager">
+		<ref local="transactionManager" />
+	</property>
+	<property name="transactionAttributes">
+		<props>
+			<prop key="save*">PROPAGATION_REQUIRED</prop>
+			<prop key="remove*">PROPAGATION_REQUIRED</prop>
+			<prop key="get*">PROPAGATION_REQUIRED</prop>
+			<prop key="initalize*">PROPAGATION_REQUIRED</prop>
+			<prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+		</props>
+	</property>
+</bean>
+
+<!-- 定义调用对象和调用对象的方法 -->
+<!-- 定时任务 A start -->
+<bean id="jobtask"
+	class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	<!-- 调用的类 -->
+	<property name="targetObject">
+		<ref bean="ProductQuartzTask" />
+	</property>
+	<!-- 调用类中的方法 -->
+	<property name="targetMethod">
+		<value>executeProduct</value>
+	</property>
+</bean>
+<!-- 定义触发时间 -->
+<bean id="doTime" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<property name="jobDetail">
+		<ref bean="jobtask" />
+	</property>
+	<!-- cron表达式 -->
+	<property name="cronExpression">
+		<value>0 */3 * * * ?</value>
+	</property>
+</bean>
+<!-- 定时任务 A end -->
+
+<bean id="orderJob"
+	class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	<property name="targetObject">
+		<ref bean="ProductQuartzTask" />
+	</property>
+	<property name="targetMethod">
+		<value>executeRule</value>
+	</property>
+</bean>
+
+<bean id="timingTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	<!-- 指定任务类 -->
+	<property name="targetObject">
+		<bean class="com.tonik.TimingTask"/>  
+	</property>
+	<!-- 指定执行的方法 -->
+	<property name="targetMethod" value="updateScannedNumber" />
+	<!-- 作业不并发调度 --> 
+	<property name="concurrent" value="false" /> 
+</bean>
+
+<bean id="triggerTime" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<property name="jobDetail">
+		<ref bean="orderJob" />
+	</property>
+	<property name="cronExpression">
+		<value>0 */1 * * * ?</value>
+	</property>
+</bean>
+<!-- 定时任务 B end -->
+
+<!-- SimpleTriggerBean，只支持按照一定频度调用任务，如每隔2秒钟运行一次 -->
+<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+	<property name="jobDetail" ref="timingTask" />
+<!-- 	调度工厂实例化后，经过0秒开始执行调度 -->
+	<property name="startDelay" value="0" />
+<!-- 	每5秒调度一次   -->
+	<property name="repeatInterval" value="5000" />
+</bean>
+
+<!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 -->
+<bean id="startQuertz" lazy-init="false" autowire="no"
+	class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	<property name="triggers">
+		<list>
+			<ref bean="simpleTrigger"/>
+			<ref bean="doTime" />
+			<ref bean="triggerTime" />
+		</list>
+	</property>
+</bean>
+	

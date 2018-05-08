@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="com.thinvent.rules.dao.businesslayer.Portletmode" 
+    table="portletmode"
+>
+		<cache usage="read-write"/>
+    <composite-id name="comp_id" class="com.thinvent.rules.dao.businesslayer.PortletmodePK">
+        <key-property 
+            name="portletid" 
+            column="portletid" 
+            type="java.lang.String"
+            length="20"
+        />
+        <key-property 
+            name="portletmodeid" 
+            column="portletmodeid" 
+            type="java.lang.String"
+            length="10"
+        />
+    </composite-id>    
+
+    <property
+        name="portletmodename"
+        type="java.lang.String"
+        column="portletmodename"
+        length="100"
+    />
+
+    <!-- Associations -->
+    <!-- derived association(s) for compound key -->
+    <!-- bi-directional many-to-one association to Portlet -->
+    <many-to-one
+        name="portlet"
+	    class="com.thinvent.rules.dao.businesslayer.Portlet"
+	    update="false"
+	    insert="false"
+	>
+    	<column name="portletid" />
+	</many-to-one>
+	
+    <!-- end of derived association(s) -->
+  
+    <!-- bi-directional one-to-many association to Portletdrool -->
+    <set
+        name="portletdrools"
+        lazy="true"
+        inverse="true"
+		cascade="none"
+    >
+        <key>
+            <column name="portletid" />
+            <column name="portletmodeid" />
+        </key>
+        <one-to-many 
+            class="com.thinvent.rules.dao.businesslayer.Portletdrool"
+        />
+    </set>
+
+</class>
+</hibernate-mapping>

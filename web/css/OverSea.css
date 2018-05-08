@@ -1,0 +1,162 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+
+.bgIndexImage{
+    background: url(../images/OverSea/backgroundBig.png) no-repeat fixed;
+    background-size:100% 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.head{
+    width: 100%;
+    position: fixed;
+    top: 55px;
+}
+.headLeft{
+    width: 650px;
+    margin: 0 auto;
+   
+}
+.headRight{
+    width: 550px;
+    float:right;
+    padding-top: 28px;
+}
+.headRight a{
+    padding: 10px 35px 10px 35px;
+    font-size: 18px;
+    color: #333333;
+    font-family: Microsoft Yahei;
+    text-decoration:none;
+}
+.headRight a:visited{
+    padding: 10px 35px 10px 35px;
+    font-size: 18px;
+    color: #333333;
+    font-family: Microsoft Yahei;
+    text-decoration:none;
+}
+
+.body{
+    width: 550px;
+    height: 400px;
+    margin:0 auto;
+    background: url("../images/OverSea/loginK.png") no-repeat;
+}
+.body p{
+    width: 100px;
+    height: 40px;
+    margin:0 auto;
+    padding-top: 50px;
+    color: #014099;
+    font-size: 24px;
+}
+.body form{
+    width: 350px;
+    margin:10px auto;
+}
+.userInput{
+    width: 310px;
+    height: 40px;
+    color: #666666;
+    font-size: 20px;
+    background:url("../images/OverSea/user.png") 10px 10px no-repeat;
+    padding-left: 50px;
+    margin-bottom: 20px;
+}
+.passwordInput{
+    width: 310px;
+    height: 40px;
+    color: #666666;
+    font-size: 20px;
+    background:url("../images/OverSea/password.png") 10px 10px no-repeat;
+    padding-left: 50px;
+    margin-bottom: 20px;
+}
+.checkedInput{
+    margin-bottom: 20px;
+}
+.remenber{
+    font-size: 20px;
+    color: #666666;
+    font-family: Microsoft Yahei;
+}
+.center{
+    margin: 0 auto;
+    position: fixed;
+    /*top: 370px;*/
+    top:36%;
+    width: 100%;min-width:1500px;
+}
+.select {
+    position:relative;
+    display: inline-block;
+    margin-left: 16%;
+}
+.select:hover{
+    cursor:pointer;
+}
+.select a{
+    position: absolute;
+    top: 132px;
+    left: 75px;
+    color: white;
+    font-size: 26px;
+    text-decoration:none;
+    font-family: Microsoft Yahei;
+}
+.footer{
+	background: url(../images/OverSea/bg-color.png) no-repeat fixed;
+    width: 100%;
+    position: fixed;
+    bottom: 10px;
+}
+.footer p{
+    margin:0 auto;
+    width:440px;
+    font-size: 16px;
+    color: #666666;
+    font-family: Microsoft Yahei;
+}
+
+.publicLogin{
+	background: url(../images/OverSea/bg-color.png) no-repeat fixed;
+	width: 100%; 
+	height: 100%;
+	
+}
+.bigDtaCenterImg{
+	background: url(../images/OverSea/bg-bigData.png) no-repeat ;
+	width:100%;
+	height: 900px;
+	padding:40px;
+}
+
+.machineCenterImg{
+	background: url(../images/OverSea/bg-machineLearning.png) no-repeat ;
+	width:100%;
+	height: 900px;
+	padding:40px;
+}
+
+.streamCenterImg{
+	background: url(../images/OverSea/bg-streamEngine.png) no-repeat ;
+	width:100%;
+	height: 900px;
+	padding:40px;
+}
+
+.publicHead{
+	background: url(../images/OverSea/bg-color.png) no-repeat fixed;
+	width: 100%;
+    padding-top: 50px;
+    margin-bottom: 40px;
+}
+
+.headLogo{
+	padding-left: 5%;
+}
+

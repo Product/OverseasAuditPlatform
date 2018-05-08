@@ -1,0 +1,2202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="Generator" content="EditPlus®" />
+    <meta name="Author" content="" />
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <title>机器学习平台</title>
+    <link rel="shortcut icon" href="images/logoNav.png"/>
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="css/mainFrame.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="./css/common.css" />
+    <link rel="stylesheet" type="text/css" href="./css/testTarget.css" />
+    <link rel="stylesheet" href="./css/OverSea.css" type="text/css"/>
+    
+    <link type="text/css" rel="stylesheet" href="./js/jsTree/jstree/syntax/!style.css" />
+    <link type="text/css" rel="stylesheet" href="./js/jsTree/jstree/themes/default/style.css" />
+   
+	
+</head>
+<body>
+<div id="loginbox" class="publicLogin">
+    <div class="publicHead">
+	    <div class="headLogo">
+	        <img src="images/OverSea/OverSeaLogo.png" style="width:83px; height:83px;"/>
+	        <span><img src="images/OverSea/font-MachineLearning.png" /></span>
+	    </div>
+    </div>
+    <div class="machineCenterImg">
+	   <div class="body" style="position: relative;top: 12%;"><p>用户登录</p>
+		    <form>
+		        <input type="text" class="userInput" id="txt_userCode"/>
+		        <input type="password" class="passwordInput" id="txt_userPwd"/>
+		        <a href="#" id="bt_login" onkeydown="enterLogin()" ><img src="images/OverSea/loginBtn.png"/></a>
+		    </form>
+		</div> 
+	
+	</div>
+ <div class="footer">
+       <p>Copyright©2017 All rights reserved 跨境电商风险管理平台</p>
+ </div>
+</div>
+    <div id="first" style="display: none;">
+        <div class="header">
+            <div class="headerLogo">
+                <a url="Index_Prompt.htm" onclick="toIndexUrl(this)" target="iframeMain" style="cursor: pointer;">
+                    <img src="images/logo12.png" alt="" width="290" />
+                </a>
+            </div>
+            <div class="header-text">
+                机器学习
+            </div>
+            <div class="headerMenu">
+                <ul id="headerMenu">
+                </ul>
+            </div>
+            <div class="headerRigth">
+                <a id="linkExit" href="OverSeaIndex.html">&nbsp;</a>
+            </div>
+        </div>
+        <div class="mainMenu">
+            <span class="userName">
+                <img src="images/user.png" width="20" />欢迎您，<a url="MyUserInfo_manage.aspx" onclick="HomePage()"
+                    target="iframeMain" style="cursor: pointer;">管理员</a></span> <span class="menuTitle">
+                        导航菜单</span>
+        </div>
+        <div id="mainSpan" style="cursor: pointer; height: 484px;">
+        </div>
+        <div class="mainContent" id="mainContent">
+            <div class="currentPosition">
+                <img src="images/current.png" width="20" style="margin-top: 5px;" /><span id="currentPosition">当前位置：首页</span>
+                <span style="position: absolute; top: 0px; right: 10px;"><a href="#" onclick="TopNone(this)">
+                    收缩</a></span>
+            </div>
+            <div id="iframeMain" width="100%" height="100%" frameborder="0" style="padding: 0px; width: 1181px;" marginwidth="1" marginheight="1">
+                 
+                <!--商品管理-网站管理-list -->
+                <div class="wrap" id="websiteManage_mac">
+                    <div class="top_box">
+                        <div class="Title_tab">高级检索</div>
+                    </div>
+                    <div class="divSearch">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    &nbsp;关键字：
+                                    <input class="input_text" id="txt_WebsiteQuery" type="text" placeholder="请输入您要搜索的内容..." />
+                                    &nbsp;创建日期：
+                                    <input class="input_text" id="txt_WebsiteBeginDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+                                           type="text" placeholder="开始日期" />
+                                    至
+                                    <input class="input_text" id="txt_WebsiteEndDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+                                           type="text" placeholder="结束日期" />
+                                    &nbsp;
+                                    <button class="sear_btn" onclick="GetWebsiteLList(1)">
+                                        查询</button>
+                                    <button class="addNew_btn" onclick="showWDialog('add','')">
+                                        添加</button>
+                                	<input style="margin-left: 30px; height: 29px;border-radius: 5px;" type="button" value="网站核实" onclick="WebsiteCheck()"/>
+                                    <input style="margin-left: 20px; height: 29px;border-radius: 5px;" type="button" value="网站采集配置" onclick="WebsiteCollect()" />
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="WebsiteMessge" class="messgeRow">
+                    </div>
+                    <div class="top_box">
+                        <div class="Title_tab">
+                            检索结果</div>
+                    </div>
+                    <div class="content_area">
+                        <div>
+                            <table width="100%" class="mytable">
+                                <thead>
+                                <tr class="th">
+                                    <td width="50">
+                                        序号
+                                    </td>
+                                    <td width="100">
+                                        网站名称
+                                    </td>
+                                    <td width="100">
+                                        网址
+                                    </td>
+                                    <td width="100">
+                                        网站类别
+                                    </td>
+                                    <td width="100">
+                                        公司地址
+                                    </td>
+                                    <td width="100">
+                                        备注
+                                    </td>
+                                    <td width="100">
+                                        创建日期
+                                    </td>
+                                    <td width="120" class="remRightBorder">
+                                        操作
+                                    </td>
+                                </tr>
+                                </thead>
+                                <tbody id="websiteList">
+                                </tbody>
+                            </table>
+                            <!--分页-->
+                            <div id="websitePaging" class="paging">
+                                <span class="pagingBtn" onclick="WFirstPage()" style="color:#bcbcbc;font-weight:bold;"> << </span>&nbsp;<span class="pagingBtn"
+                                                                                                                                              onclick="WPreviousPage()" style="color:#bcbcbc;font-weight:bold;"> < </span>&nbsp;<span class="pageIndex">1</span>&nbsp;<span class="pagingBtn" onclick="WNextPage()" style="color:#2e6ab1;font-weight:bold;">
+                                        > </span>&nbsp;<span class="pagingBtn" onclick="WEndPage()" style="color:#2e6ab1;font-weight:bold;"> >> </span>&nbsp;
+                                <span>共<span class="pageCount">1</span>页， <span
+                                        class="dataCount">0</span>条数据。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--商品管理-网站管理-编辑-->
+                <div class="wrap" id="websiteListDom_Edit">
+                    <div class="top_box">
+                        <div class="Title_tab">
+                            网站信息编辑</div>
+                    </div>
+                    <div class="content_area">
+                        <table class="ThreeTextTab" id="webList_mytable2">
+                            <tr class="twoTabNormal">
+                                <td class="tab_th">
+                                    <font>*</font>&nbsp;网站名称：
+                                </td>
+                                <td class="tab_tr">
+                                    <input type="text" id="txt_websiteName" />
+                                </td>
+                                <td class="tab_th">
+                                    <font>*</font>&nbsp;网址：
+                                </td>
+                                <td class="tab_tr">
+                                    <input type="text" id="txt_websiteLocation" />
+                                </td>
+                                <td class="tab_th">
+                                    <font>*</font>&nbsp;网站类型：
+                                </td>
+                                <td class="tab_tr">
+                                    <select id="op_website_style" readonly>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="twoTabNormal">
+                                <td class="tab_th">
+                                    公司地址：
+                                </td>
+                                <td class="tab_tr">
+                                    <input type="text" id="txt_Address" />
+                                </td>
+
+                                <td class="tab_th">
+                                    <font>*</font>&nbsp;网站诚信度：
+                                </td>
+                                <td class="tab_tr">
+                                    <input type="text" id="txt_websiteIntegrity" />
+                                </td>
+
+                                <td class="tab_th">
+                                    综合得分：
+                                </td>
+                                <td class="tab_tr">
+                                    <input type="text" id="txt_websiteScore" />
+                                </td>
+
+                            </tr>
+                            <tr class="threeTabArea">
+                                <td class="tab_th">
+                                    备注：
+                                </td>
+                                <td class="tab_tr" colspan="2">
+                                    <textarea placeholder="请输入备注信息..." id="txt_websiteRemark" class="addThreeTextarea" runat="server" name="S1"></textarea>
+                                </td>
+                                <td class="tab_th">
+                                    所属地区：
+                                </td>
+                                <td class="tab_tr">
+                                    <button id="addWebsiteArea" onclick="GetWebsiteArea()" class="btnAdd" style="display: inline-block;">选择国家</button>
+                                    <label id='txt_websitecountry'></label>
+                                    <label id='txt_websitearea'></label>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="submitTab">
+                            <tr >
+                                <td>
+                                    <input type="button" value="提 交" onclick="SaveWebsite()" class="submit_btn"/>&nbsp;&nbsp;
+                                    <input type="button" value="返 回" rel="websiteManage_mac" onclick="toUrl(this)" class="back_btn"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="hidden" id="hid_websiteListParam" />
+                    </div>
+                </div>
+                <!--商品管理-网站管理-查看-->
+                <div class="wrap" id="websiteDetailsDom">
+                    <div class="top_box">
+                        <div class="Title_tab">
+                            网站详情查看</div>
+                    </div>
+                    <div class="content_area">
+                        <table class="ThreeTextTab">
+                            <tr class="twoTabNormal">
+                                <td class="tab_th">
+                                    网站编号：
+                                </td>
+                                <td class="tab_tr"><input type="text" id="txt_DwebsiteId" readonly /></td>
+
+                                <td class="tab_th">
+                                    网站名称：
+                                </td>
+                                <td class="tab_tr"><input type="text" id="txt_DwebsiteName" readonly /></td>
+                                <td class="tab_th">
+                                    网站类型：
+                                </td>
+                                <td class="tab_tr"><input type="text" id="txt_DwebsiteType" readonly /></td>
+
+                            </tr>
+                            <tr class="twoTabNormal">
+                                <td class="tab_th">
+                                    网址：
+                                </td>
+                                <td class="tab_tr"><input type="text" id="txt_DLocation" readonly /></td>
+
+                                <td class="tab_th">
+                                    所属国家：
+                                </td>
+                                <td class="tab_tr"><input type="text" id="txt_DwebsiteCountry" readonly /></td>
+
+                                <td class="tab_th">
+                                    所属地区：
+                                </td>
+                                <td class="tab_tr"><input type="text" id="txt_DwebsiteArea" readonly /></td>
+
+                            </tr>
+                            <tr class="twoTabNormal">
+                                <td class="tab_th">
+                                    诚信度：
+                                </td>
+                                <td class="tab_tr"><input type="text" id="txt_DwebsiteIntegrity" readonly /></td>
+
+                                <td class="tab_th">
+                                    综合得分：
+                                </td>
+                                <td class="tab_tr"><input type="text" id="txt_DwebsiteScore" readonly /></td>
+
+                                <td class="tab_th">
+                                    公司地址：
+                                </td>
+                                <td class="tab_tr"><input type="text" id="txt_DAddress" readonly /></td>
+
+                            </tr>
+                            <tr>
+                                <td class="tab_th">
+                                    备注：
+                                </td>
+                                <td class="tab_tr"><input type="text" id="txt_DwebsiteRemark" readonly /></td>
+
+                            </tr>
+                        </table>
+                        <input type="hidden" id="hid_websiteDetailsParam" />
+                        <table class="submitTab">
+                            <tr >
+                                <td>
+                                    <input type="button" value="返 回" rel="websiteManage_mac" onclick="toUrl(this)" class="back_btn"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+              	<!--商品管理-网站管理-区域列表-->
+                <div class="wrap" id="BrandRegionDom_Edit">
+                    <div class="top_box">
+                        <div class="Title_tab">高级检索</div>
+                    </div>
+                    <div class="divSearch">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    &nbsp;关键字：<input id="txt_BrandRegionQuery" type="text" placeholder="请输入您要搜索的内容..."/>
+                                    &nbsp;
+                                    <button class="sear_btn" onclick="GetBrandRegionList(1)">查询</button>
+                                    <input type="button" value="返 回" rel="websiteListDom_Edit" onclick="ReturnPrivateParam(this)" class="back_btn"/>
+                                </td>
+                                <td style="width: 120px;">
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <input type="hidden" id="hid_TypeParam" /> <!--用于存储针对的model类型（website，product或brand）  -->
+                        <input type="hidden" id="hid_PreviousParam" />
+                        <input type="hidden" id="hid_BrandRegionParam" />
+                    </div>
+                    <div id="BrandRegionMessge" class="messgeRow"></div>
+                    <div class="top_box">
+                        <div class="Title_tab">检索结果</div>
+                    </div>
+                    <div class="content_area">
+                        <div>
+                            <table width="100%" class="mytable">
+                                <thead>
+                                <tr class="th">
+                                    <td width="50">
+                                    </td>
+                                    <td width="100">
+                                        区域代码
+                                    </td>
+                                    <td width="100">
+                                        区域名
+                                    </td>
+                                    <td width="100">
+                                        操作
+                                    </td>
+                                </tr>
+                                </thead>
+                                <tbody id="BrandRegionList">
+                                </tbody>
+
+                            </table>
+                            <!--分页-->
+                            <div id="BrandRegionPaging" class="paging">
+                                <span class="pagingBtn" onclick="FirstPage_BrandRegion()" style="color:#bcbcbc;font-weight:bold;"> << </span>&nbsp;<span class="pagingBtn"
+                                                                                                                                                         onclick="PreviousPage_BrandRegion()" style="color:#bcbcbc;font-weight:bold;"> < </span>&nbsp;<span class="pageIndex">1</span>&nbsp;<span class="pagingBtn" onclick="NextPage_BrandRegion()" style="color:#2e6ab1;font-weight:bold;">
+                                        > </span>&nbsp;<span class="pagingBtn" onclick="EndPage_BrandRegion()" style="color:#2e6ab1;font-weight:bold;"> >> </span>&nbsp;
+                                <span>共<span class="pageCount">1</span>页， <span
+                                        class="dataCount">0</span>条数据。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--商品管理-网站管理-国家列表-->
+                <div class="wrap" id="BrandCountryDom_Edit">
+                    <div class="top_box">
+                        <div class="Title_tab">高级检索</div>
+                    </div>
+                    <div class="divSearch">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    &nbsp;关键字：<input id="txt_BrandCountryQuery" type="text" placeholder="请输入您要搜索的内容..."/>
+                                    &nbsp;
+                                    <button class="sear_btn" onclick="GetBrandCountryByR()">查询</button>
+                                    <button class="submit_btn" onclick="checkBrandCountryRadio()" style="margin-left:20px;margin-right:20px;">确定</button>
+                                    <input type="button" value="返 回" rel="BrandRegionDom_Edit" onclick="toUrl(this)" class="back_btn"/>
+                                </td>
+                                <td style="width: 120px;">
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <input type="hidden" id="hid_BrandCountryParam" />
+                    </div>
+                    <div id="BrandCountryMessge" class="messgeRow"></div>
+                    <div class="top_box">
+                        <div class="Title_tab">检索结果</div>
+                    </div>
+                    <div class="content_area">
+                        <div>
+                            <table width="100%" class="mytable">
+                                <thead>
+                                <tr class="th">
+                                    <td width="50">
+                                    </td>
+                                    <td width="100">
+                                        国家代码
+                                    </td>
+                                    <td width="100">
+                                        国家名
+                                    </td>
+                                    <td width="100">
+                                        操作
+                                    </td>
+                                </tr>
+                                </thead>
+                                <tbody id="BrandCountryList">
+                                </tbody>
+
+                            </table>
+                            <!--分页-->
+                            <div id="BrandCountryPaging" class="paging">
+                                <span class="pagingBtn" onclick="FirstPage_BrandCountry()" style="color:#bcbcbc;font-weight:bold;"> << </span>&nbsp;<span class="pagingBtn"
+                                                                                                                                                          onclick="PreviousPage_BrandCountry()" style="color:#bcbcbc;font-weight:bold;"> < </span>&nbsp;<span class="pageIndex">1</span>&nbsp;<span class="pagingBtn" onclick="NextPage_BrandCountry()" style="color:#2e6ab1;font-weight:bold;">
+                                        > </span>&nbsp;<span class="pagingBtn" onclick="EndPage_BrandCountry()" style="color:#2e6ab1;font-weight:bold;"> >> </span>&nbsp;
+                                <span>共<span class="pageCount">1</span>页， <span
+                                        class="dataCount">0</span>条数据。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--商品管理-网站管理-地区列表-->
+                <div class="wrap" id="BrandAreaDom_Edit">
+                    <div class="top_box">
+                        <div class="Title_tab">高级检索</div>
+                    </div>
+                    <div class="divSearch">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    &nbsp;关键字：
+                                    <input id="txt_BrandAreaQuery" type="text" placeholder="请输入您要搜索的内容..." />
+                                    &nbsp;
+                                    <button class="sear_btn" onclick="GetBrandAreaList(1)">查询</button>
+                                    <button class="submit_btn" onclick="checkBrandAreaRadio()" style="margin-left:20px;margin-right:20px;">确定</button>
+                                    <button class="back_btn" rel="BrandCountryDom_Edit" onclick="toUrl(this)">返回</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="BrandAreaMessge" class="messgeRow">
+                    </div>
+                    <div class="top_box">
+                        <div class="Title_tab">
+                            检索结果</div>
+                    </div>
+                    <div class="content_area">
+                        <div>
+                            <table width="100%" class="mytable">
+                                <thead>
+
+                                <tr class="th">
+                                    <td width="50">
+                                    </td>
+                                    <td width="100">
+                                        地区代码
+                                    </td>
+                                    <td width="100">
+                                        地区名称
+                                    </td>
+                                </tr>
+                                </thead>
+                                <tbody id="BrandAreaList">
+                                </tbody>
+                            </table>
+                            <div id="BrandAreaPaging" class="paging">
+                                <span class="pagingBtn" onclick="FirstPage_BrandArea()" style="color:#bcbcbc;font-weight:bold;"> << </span>&nbsp;<span class="pagingBtn"
+                                                                                                                                                       onclick="PreviousPage_BrandArea()" style="color:#bcbcbc;font-weight:bold;"> < </span>&nbsp;<span class="pageIndex">1</span>&nbsp;<span class="pagingBtn" onclick="NextPage_BrandArea()" style="color:#2e6ab1;font-weight:bold;">
+                                        > </span>&nbsp;<span class="pagingBtn" onclick="EndPage_BrandArea()" style="color:#2e6ab1;font-weight:bold;"> >> </span>&nbsp;
+                                <span>共<span class="pageCount">1</span>页， <span
+                                        class="dataCount">0</span>条数据。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!--商品管理-网站管理-网站核实-->
+                <div class="wrap" id="websiteManage_check">
+                <div class="top_box">
+                        <div class="Title_tab">高级检索</div>
+                    </div>
+                    <div class="divSearch">
+                        <table>
+                           <tbody>
+                            <tr>
+                                <td>
+                                    &nbsp;关键字：
+                                    <input id="txt_webManageKeyWords" class="input_text" type="text" placeholder="请输入您要搜索的内容..." />&nbsp;
+                                  	发现时间：
+                                  	<input class="input_text" id="txt_WebManageBeginDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" type="text" placeholder="选择开始日期" />
+                                  	至
+                                    <input class="input_text" id="txt_WebManageEndDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" type="text" placeholder="选择结束日期" />&nbsp;
+                                    已处理：
+                                    <select class="produceSel" id="op_conductType">
+                                    	<option value="0">全部</option>
+                                    	<option value="1">是</option>
+                                    	<option value="2">否</option>
+                                    </select>
+                                    <button class="sear_btn" onclick="GetMachineWebsiteCheckList(1,10)">搜索</button>
+                                 	<button class="back_btn" rel="websiteManage_mac" onclick="toUrl(this)">返回</button>
+                                 </td>
+                            </tr>
+                           </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="top_box">
+                    	<div class="Title_tab" style="float: left; cursor: pointer;"  onclick="BatchWebAdd(this)">批量添加</div> &nbsp;
+                    	<div class="Title_tab" style="float: left; cursor: pointer;"  onclick="BatchWebRefuse(this)">批量拒绝</div> 
+                    </div>
+                    <div class="content_area">
+                         <div>
+							 <table width="100%" class="mytable">
+                                <thead>
+                                <tr class="th">
+                                	<td width="20">
+		<input type='checkbox' class='mismatchWebSite' onclick="WebsiteselectAll()"/>&nbsp;全选
+                                	</td>
+                                    <td width="20">
+                                        序号
+                                    </td>
+                                    <td width="100">
+                                        网站URL
+                                    </td>
+                                    <td width="50">
+                                        网站名称
+                                    </td>
+                                    <td width="50">
+                                        网站类别
+                                    </td>
+                                    <td width="50">
+                                        发现时间
+                                    </td>
+                                  	<td width="100" class="remRightBorder">
+                                        操作
+                                    </td>
+                                </tr>
+                                </thead>
+                                <tbody id="websiteCheckManageList">
+                                </tbody>
+                            </table>
+                            <!--分页-->
+                            <div id="websiteMachinePaging" class="paging">
+                                <span class="pagingBtn" onclick="FirstPage_websiteCheck()" style="color:#bcbcbc;font-weight:bold;" > <<  </span>&nbsp;
+                                <span class="pagingBtn" onclick="PreviousPage_websiteCheck()" style="color:#bcbcbc;font-weight:bold;"> < </span>&nbsp;
+                                <span class="pageIndex">1</span>&nbsp;
+                                <span class="pagingBtn" onclick="NextPage_websiteCheck()" style="color:#2e6ab1;font-weight:bold;">> </span>&nbsp;
+                                <span class="pagingBtn" onclick="EndPage_websiteCheck()" style="color:#2e6ab1;font-weight:bold;"> >> </span>&nbsp;
+                                <span>共
+                                    <span class="pageCount">1</span>页，
+                                    <span class="dataCount">0</span>条数据。
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--商品管理-网站管理-网站采集list-->
+				<div class="wrap" id="WebAcquisitionDom_List">
+                   <div class="top_box">
+                        <div class="Title_tab">网站采集配置</div>
+                        <button class="addNew_btn" onclick="AddWebAcquisition()" style="position: relative; top: -28px;left: 84%;">
+                            添加
+                        </button>
+                        <input type="button"  rel="websiteManage_mac" onclick="toUrl(this)" value='返回' style="position: relative; top: -28px;left: 84%;" class="back_btn"/>
+                   </div>
+                   <div class="content_area">
+					 <div>
+						<table width="100%" class="mytable">
+                                <thead>
+                                <tr class="th">
+                                    <td width="10">
+                                        序号
+                                    </td>
+                                    <td width="50">
+                                       采集器
+                                    </td>
+                                    <td width="50">
+                                       网址
+                                    </td>
+                                    <td width="50">
+                                       网站名称
+                                    </td>
+                                    <td width="50">
+                                       标题参数
+                                    </td>
+                                    <td width="50">
+                                       时间参数
+                                    </td>
+                                    <td width="30">
+                                       采集频率
+                                    </td>
+                                    <td width="50">
+                                       创建时间
+                                    </td>
+                                    <td width="80" class="remRightBorder">
+                                       操作
+                                    </td>
+                                 </tr>
+                                </thead>
+                                <tbody id="webAcquisitionList">
+                                </tbody>
+                            </table>
+                            <!--分页-->
+                            <div id="webAcquisitionPaging" class="paging">
+                                <span class="pagingBtn" onclick="FirstPage_webAcquisition()" style="color:#bcbcbc;font-weight:bold;" > <<  </span>&nbsp;
+                                <span class="pagingBtn" onclick="PreviousPage_webAcquisition()" style="color:#bcbcbc;font-weight:bold;"> < </span>&nbsp;
+                                <span class="pageIndex">1</span>&nbsp;
+                                <span class="pagingBtn" onclick="NextPage_webAcquisition()" style="color:#2e6ab1;font-weight:bold;">> </span>&nbsp;
+                                <span class="pagingBtn" onclick="EndPage_webAcquisition()" style="color:#2e6ab1;font-weight:bold;"> >> </span>&nbsp;
+                                <span>共
+                                    <span class="pageCount">1</span>页，
+                                    <span class="dataCount">0</span>条数据。
+                                </span>
+                            </div>
+                        </div>
+				   </div>
+			   </div>
+			    <!--商品管理-网站管理-网站采集-添加/编辑 -->
+			    <div  class="wrap" id="WebAcquisitionDom_Edit">
+				   <div class="top_box">
+	                    <div class="Title_tab">网站采集配置</div>
+	               </div>
+			   	   <div class="content_area">
+			   	   		<table class="ThreeTextTab" id="WebAcquisition_mytable">
+                            <tr class="twoTabNormal">
+                            	<td class="tab_th">
+                                    <font>*</font>&nbsp;
+                                   采集器名称：
+                                </td>
+                                <td class="tab_tr">
+                                    <input type="text" id="txt_WebAcquisitionName" placeholder="采集器名称"/>
+                                </td>
+                                <td class="tab_th">
+                                    <font>*</font>&nbsp;
+                                    网址：
+                                </td>
+                                <td class="tab_tr">
+                                    <input type="text" id="txt_WebAcquisitionUrl" placeholder="网址"/>
+                                </td>
+                                <td class="tab_th">
+                                    网站类型：
+                                </td>
+                                <td class="tab_tr">
+                                    <input type="text" id="txt_WebAcquisitionType" placeholder="网站类型"/>
+                                </td>
+                                <td class="tab_th">
+                                    标题参数：
+                                </td>
+                                <td class="tab_tr">
+                                	<input type="text" id="txt_WebAcquisitionTitle" placeholder="标题参数"/>
+                                </td>
+                            </tr>
+                            <tr class="twoTabNormal">
+                                <td class="tab_th">
+                                    下一页参数：
+                                </td>
+                                <td class="tab_tr">
+                                    <input type="text" id="txt_WebAcquisitionNext" placeholder="下一页参数"/>
+                                </td>
+                                <td class="tab_th">
+                                    时间参数：
+                                </td>
+                                <td class="tab_tr">
+                                	<input class="input_text" id="txt_WebAcquisitionDate" type="text" placeholder="时间参数" />
+                                </td>
+                                <td class="tab_th">
+                                    总页数：
+                                </td>
+                                <td class="tab_tr">
+                                    <input type="text" id="txt_WebAcquisitionPageTotal" placeholder="总页数,请输入整型数字" onkeydown="onlyNum();" style="ime-mode:Disabled"/>
+                                </td>
+                                <td class="tab_th">
+                                    采集频率：
+                                </td>
+                                <td class="tab_tr">
+                                	<select id="op_WebAcquisitionFrequency">
+                                		<option value="0">请选择</option>
+                                		<option value="1">一天</option>
+                                		<option value="7">一周</option>
+                                		<option value="30">一个月</option>
+                                	</select>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="submitTab">
+                            <tr>
+                                <td>
+                                	<input type="hidden" id="hid_WebAcquisitionId"/>
+                                    <input type="button" value="提 交" onclick="SaveWebAcquisition()" class="submit_btn"/>&nbsp;&nbsp;
+                                    <input type="button" value="返 回" rel="WebAcquisitionDom_List" onclick="toUrl(this)" class="back_btn"/>
+                                </td>
+                            </tr>
+                        </table>
+			   	   </div>
+			   </div>
+                
+                <!--商品管理-标准产品管理-->
+                <div class="wrap" id="standardManage_mac">
+                    <div class="top_box">
+                        <div class="Title_tab">
+                            高级检索</div>
+                    </div>
+                    <div class="divSearch">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    &nbsp;商品俗名：
+                                    <input class="input_text" id="productTrivialName" type="text" placeholder="请输入..." />
+                                    &nbsp;国标/专业术语：
+                                    <input class="input_text" id="productScientificName" type="text" placeholder="请输入..." />
+                                    <button class="sear_btn" onclick="GetStandardManageList(1)">
+                                        查询</button>
+                                    <button class="addNew_btn" onclick="addStreamPubOpiCol()">
+                                        添加</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="top_box">
+                        <div class="Title_tab">
+                            标准产品管理</div>
+                    </div>
+                    <div class="content_area">
+                        <div>
+                            <table width="85%" class="mytable">
+                                <thead>
+                                <tr class="th">
+                                    <td width="50">
+                                        序号
+                                    </td>
+                                    <td width="50">
+                                        商品俗名
+                                    </td>
+                                    <td width="50">
+                                        国标/专业术语
+                                    </td>
+                                    <td width="100">
+                                        关联时间
+                                    </td>
+                                    <td width="100" class="remRightBorder">
+                                        操作
+                                    </td>
+                                </tr>
+                                </thead>
+                                <tbody id="standardManageList">
+                                </tbody>
+                            </table>
+                            <!--分页-->
+                            <div id="standardManagePaging" class="paging">
+                                <span class="pagingBtn" onclick="staManFirstPage()" style="color:#bcbcbc;font-weight:bold;"> << </span>&nbsp;
+                                <span class="pagingBtn" onclick="staManPreviousPage()" style="color:#bcbcbc;font-weight:bold;"> < </span>&nbsp;
+                                <span class="pageIndex">1</span>&nbsp;
+                                <span class="pagingBtn" onclick="staManNextPage()" style="color:#2e6ab1;font-weight:bold;">> </span>&nbsp;
+                                <span class="pagingBtn" onclick="staManEndPage()" style="color:#2e6ab1;font-weight:bold;"> >> </span>&nbsp;
+                                <span>共
+                                    <span class="pageCount">1</span>页，
+                                    <span class="dataCount">0</span>条数据。
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                
+                <!--商品管理-标准产品管理-编辑-->
+                <div class="wrap" id="standardManage_Edit">
+                    <div class="top_box">
+                        <div class="Title_tab">
+                            标准产品编辑</div>
+                    </div>
+                    <div class="content_area">
+                        <table class="ThreeTextTab" id="webList_mytable2">
+                            <tr class="twoTabNormal">
+                                <td class="tab_th">
+                                    <font>*</font>&nbsp;商品俗名：
+                                </td>
+                                <td class="tab_tr">
+                                    <input type="text" id="txt_productTrivialName" />
+                                </td>
+                                <td class="tab_th">
+                                    国标/专业术语：
+                                </td>
+                                <td class="tab_tr">
+                                    <input type="text" id="txt_productScientificName" />
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="submitTab">
+                            <tr >
+                                <td>
+                                    <input type="button" value="提 交" onclick="SaveStandardMan()" class="submit_btn"/>
+                                    &nbsp;&nbsp;
+                                    <input type="button" value="返 回" rel="standardManage_mac" onclick="toUrl(this)" class="back_btn"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="hidden" id="hid_standardManId" />
+                    </div>
+                </div>
+
+                <!--商品管理-目录管理-->
+                <div class="wrap" id="catalogManage_mac">
+                    <div class="top_box">
+                        <div class="Title_tab">
+                            高级检索</div>
+                    </div>
+                    <div class="divSearch">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    &nbsp;商品一级目录：
+                                    <select class="produceSel" id="productFirstSel" onchange="proSelect(1)">
+                                        <option value="">请选择</option>
+                                    </select>
+                                    &nbsp;商品二级目录：
+                                    <select class="produceSel" id="productSecondSel" onchange="proSelect(2)">
+                                        <option value="">请选择</option>
+                                    </select>
+                                    &nbsp;商品三级目录：
+                                    <select class="produceSel" id="productThirdSel">
+                                        <option value="">请选择</option>
+                                    </select>
+                                    <button class="sear_btn" onclick="GetProMenuList(1)">
+                                        查询</button>
+                                    <button class="addNew_btn" onclick="addProMenu()">
+                                        添加</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="top_box">
+                        <div class="Title_tab">
+                            目录管理</div>
+                    </div>
+                    <div class="content_area">
+                        <div>
+                            <table width="85%" class="mytable">
+                                <thead>
+                                <tr class="th">
+                                    <td width="50">
+                                        序号
+                                    </td>
+                                    <td width="50">
+                                        商品三级目录
+                                    </td>
+                                    <td width="50">
+                                        商品二级目录
+                                    </td>
+                                    <td width="50">
+                                        商品一级目录
+                                    </td>
+                                    <td width="100">
+                                        关联监管目录
+                                    </td>
+                                    <td width="100">
+                                        关联时间
+                                    </td>
+                                    <td width="50">
+                                        状态
+                                    </td>
+                                    <td width="100" class="remRightBorder">
+                                        操作
+                                    </td>
+                                </tr>
+                                </thead>
+                                <tbody id="productMenuList">
+                                </tbody>
+                            </table>
+                            <!--分页-->
+                            <div id="productMenuPaging" class="paging">
+                                <span class="pagingBtn" onclick="proMenuFirstPage()" style="color:#bcbcbc;font-weight:bold;"> << </span>&nbsp;
+                                <span class="pagingBtn" onclick="proMenuPreviousPage()" style="color:#bcbcbc;font-weight:bold;"> < </span>&nbsp;
+                                <span class="pageIndex">1</span>&nbsp;
+                                <span class="pagingBtn" onclick="proMenuNextPage()" style="color:#2e6ab1;font-weight:bold;">> </span>&nbsp;
+                                <span class="pagingBtn" onclick="proMenuEndPage()" style="color:#2e6ab1;font-weight:bold;"> >> </span>&nbsp;
+                                <span>共
+                                    <span class="pageCount">1</span>页，
+                                    <span class="dataCount">0</span>条数据。
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--商品管理-目录管理-编辑-->
+                <div class="wrap" id="catalogManage_Edit">
+                    <div class="top_box">
+                        <div class="Title_tab">
+                            目录管理编辑
+                        </div>
+                    </div>
+                    <input type="hidden" id="hid_menuId"/>
+                    <div class="content_area">
+                        <table class="ThreeTextTab">
+                            <tr class="twoTabNormal">
+                                <span id="displayType">
+
+                                </span>
+                                <td class="tab_th">
+                                    <font>*</font>&nbsp;商品一级目录：
+                                </td>
+                                <td class="tab_tr">
+                                    <select id="txt_productFirstSel" onchange="proSelectTxt(1)">
+                                        <option value="">请选择</option>
+                                    </select>
+                                </td>
+                                <td class="tab_th">
+                                    商品二级目录：
+                                </td>
+                                <td class="tab_tr">
+                                    <select id="txt_productSecondSel" onchange="proSelectTxt(2)">
+                                        <option value="">请选择</option>
+                                    </select>
+                                </td>
+                                <td class="tab_th">
+                                    商品三级目录：
+                                </td>
+                                <td class="tab_tr">
+                                    <select id="txt_productThirdSel" >
+                                        <option value="">请选择</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="twoTabNormal">
+                                <td class="tab_th">
+                                    <font>*</font>&nbsp;关联监管目录：
+                                </td>
+                                <td class="tab_tr">
+                                    <select id="txt_relationMenu">
+                                        <option value="0">请选择</option>
+                                    </select>
+                                </td>
+                                <td class="tab_th">
+                                    状态：
+                                </td>
+                                <td class="tab_tr">
+                                    <select id="txt_state">
+                                        <option value="0">请选择</option>
+                                        <option value="1">启用</option>
+                                        <option value="2">禁用</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="submitTab">
+                            <tr >
+                                <td>
+                                    <input type="button" value="提 交" onclick="SaveProMenu()" class="submit_btn"/>
+                                    &nbsp;&nbsp;
+                                    <input type="button" value="返 回" rel="catalogManage_mac" onclick="toUrl(this)" class="back_btn"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <!--<input type="hidden" id="hid_standardManId" />-->
+                    </div>
+                </div>
+                
+                <!--商品管理-商品管理-->
+                <div class="wrap" id="productManage_mac">
+                	<div class="top_box">
+                        <div class="Title_tab">高级检索</div>
+                    </div>
+                    <div class="divSearch">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    &nbsp;关键字：
+                                    <input id="txt_productKeyWords"  class="input_text" type="text" placeholder="请输入您要搜索的内容..." />
+                                    &nbsp;&nbsp;分类名称：
+                                   	<select class="produceSel" id="propertyFirstSel">
+                                           <option value="">请选择</option>
+                                    </select>
+                                        <!-- <select class="produceSel" id="propertyFirstSel" onchange="typeNameFirstSel()">
+                                            <option value="0">请选择</option>
+                                        </select>
+                                        <select class="produceSel" id="propertySecondSel" onchange="typeNameSecondSel()">
+                                            <option value="0">请选择</option>
+                                        </select>
+                                        <select class="produceSel" id="propertyThirdSel">
+                                            <option value="0">请选择</option>
+                                        </select> -->
+                                    &nbsp;&nbsp;匹配状态：
+                                    <select class="produceSel" id="op_isMatched">
+                                    	<option value="">全部</option>
+                                    	<option value="true">已匹配</option>
+                                    	<option value="false">未匹配</option>
+                                    </select>
+                                    <button class="sear_btn" onclick="GetGoodsList(1,10)">搜索</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <input type="hidden" id="hid_ProductTypeParam" />
+                        <!-- <input type="hidden" id="hid_ProductTypeParentParam" value="0"/> -->
+                        <input type="hidden" id="hid_pId"/>
+                    </div>
+                    
+                    <div class="top_box">
+                        <div class="Title_tab">商品管理</div>
+                    </div>
+                    <div class="content_area">
+                        <div>
+							 <table width="100%" class="mytable">
+                                <thead>
+                                <tr class="th">
+                                    <td width="20">
+                                        序号
+                                    </td>
+                                    <td width="120">
+                                        商品信息
+                                    </td>
+                                    <td width="50">
+                                        分类名称
+                                    </td>
+                                    <td width="30">
+                                        品牌
+                                    </td>
+                                     <td width="50">
+                                        国家
+                                    </td>
+                                    <td width="50">
+                                        检索时间
+                                    </td>
+                                    <td width="20">
+                                        匹配状态
+                                    </td>
+                                    <td width="50">
+                                        操作
+                                    </td>
+                                </tr>
+                                </thead>
+                                <tbody id="goodsManageList">
+                                </tbody>
+                            </table>
+                            <!--分页-->
+                            <div id="goodsPaging" class="paging">
+                                <span class="pagingBtn" onclick="FirstPage_Goods()" style="color:#bcbcbc;font-weight:bold;" > <<  </span>&nbsp;
+                                <span class="pagingBtn" onclick="PreviousPage_Goods()" style="color:#bcbcbc;font-weight:bold;"> < </span>&nbsp;
+                                <span class="pageIndex">1</span>&nbsp;
+                                <span class="pagingBtn" onclick="NextPage_Goods()" style="color:#2e6ab1;font-weight:bold;">> </span>&nbsp;
+                                <span class="pagingBtn" onclick="EndPage_Goods()" style="color:#2e6ab1;font-weight:bold;"> >> </span>&nbsp;
+                                <span>共
+                                    <span class="pageCount">1</span>页，
+                                    <span class="dataCount">0</span>条数据。
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				<!--商品管理-商品管理-編輯 -->
+				<div class="wrap" id="productManageEdit">
+					 <div class="top_box">
+                        <div class="Title_tab">商品匹配操作</div>
+                    </div>
+                    <div class="content_area">
+                   		<table class="ThreeTextTab">
+                   		<tbody>
+                   			<tr class="twoTabNormal">
+                   			   <td class="tab_th" >
+                                   商品名称：
+                               </td>
+                   			   <td class="tab_tr">
+                                   <label  id="txt_productMName"/>
+                               </td>
+                             </tr>
+                             <tr>
+	                   			 <td class="tab_th" style="width: 10%">
+	                                  品牌：
+	                               </td>
+	                   			   <td class="tab_tr" style="width: 20%">
+	                                   <input type="text" id="txt_productBMName" placeholder="品牌" style="width:28%"/>
+	                               </td>
+                            </tr>
+                            <tr>
+                               <td class="tab_th" style="width: 10%">
+                                 国家：
+                               </td>
+                   			   <td class="tab_tr" style="width: 20%">
+                                   <select id="op_productCMName" style="width:28%">
+                                   		<option value="0">请选择</option>
+                                   </select>
+                               </td>
+                            </tr>
+                           </tbody>
+                   		</table>
+                   		<table class="submitTab">
+                            <tr>
+                                <td>
+                                	<input type="hidden" id="hid_goodsid"/>
+                                    <input type="button" value="保存" onclick="SaveGoodsME()" class="submit_btn"/>&nbsp;&nbsp;
+                                    <input type="button" value="返 回" rel="productManage_mac" onclick="toUrl(this)" class="back_btn"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+				</div>
+				
+                 <!--信息管理-舆情-->
+                <div class="wrap" id="publicSentiment_mac">
+                    <div class="top_box">
+                        <div class="Title_tab">
+                            舆情</div>
+                    </div>
+
+                    <div style="float: left;margin:0 15px;width:35%;border:1px solid rgb(181, 181, 181);height:678px;background-color: #fff;overflow-y: auto;">
+                        <div class="tree">
+                            <ul id="eventList-tree">
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div style="float: left;width:62%;border:1px solid rgb(181, 181, 181);height:678px;background-color: #fff;overflow-y: auto;">
+                        <input type="text"  class="addPoint" id="displayTitle" style="height:30px;border:0px;"/>
+                        <input type='hidden'  id='editID' />
+                        <div style="margin:20px;" id="event_display">
+
+                        </div>
+                    </div>
+                </div>
+
+                <!--信息管理-第三方报告-->
+                <div class="wrap" id="thirdPartyReport_mac">
+                    <div class="top_box">
+                        <div class="Title_tab">第三方报告</div>
+                         <input type="button" value="报告采集配置" onclick="FirstPage_acquisition()"  style="position: relative; top: -24px;left: 86%;" />
+                    </div>
+                    <div class="content_area">
+                         <div>
+                            <table width="100%" class="mytable">
+                                <thead>
+                                <tr class="th">
+                                    <td width="10">
+                                        序号
+                                    </td>
+                                    <td width="50">
+                                        标题
+                                    </td>
+                                    <td width="50">
+                                        翻译
+                                    </td>
+                                    <td width="50">
+                                        国家
+                                    </td>
+                                    <td width="50">
+                                        品牌
+                                    </td>
+                                    <td width="50">
+           	       时间
+                                    </td>
+                                 </tr>
+                                </thead>
+                                <tbody id="infoList">
+                                </tbody>
+                            </table>
+                            
+                            <!--分页-->
+                            <div id="reportingPaging" class="paging">
+                                <span class="pagingBtn" onclick="FirstPage_reporting()" style="color:#bcbcbc;font-weight:bold;"> << </span>&nbsp;
+                                <span class="pagingBtn" onclick="PreviousPage_reporting()" style="color:#bcbcbc;font-weight:bold;"> < </span>&nbsp;
+                                <span class="pageIndex">1</span>&nbsp;
+                                <span class="pagingBtn" onclick="NextPage_reporting()" style="color:#2e6ab1;font-weight:bold;">> </span>&nbsp;
+                                <span class="pagingBtn" onclick="EndPage_reporting()" style="color:#2f6ab1;font-weight:bold;"> >> </span>&nbsp;
+                                <span>共<span class="pageCount">1</span>页， 
+                                <span class="dataCount">0</span>条数据。</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--信息管理-第三方报告-显示翻译全文  -->
+                <div class="wrap" id="translation_View">
+                	<div class="top_box">
+                		<div class="Title_tab">显示翻译</div>
+                	</div>
+                	<div class="content_area">
+                		 <div id="translation_title" class="info_title"></div>
+                         <div id="translation_content" class="info_content"></div>
+                   </div>
+                   <table class="submitTab">
+	                        <tr>
+	                            <td>
+	                                <input type="button" value="返 回" rel="thirdPartyReport_mac" onclick="toUrl(this)" class="back_btn"/>
+	                            </td>
+	                        </tr>
+	               </table>
+                </div>
+                <!--信息管理-第三方报告-报告采集配置list-->
+  				<div class="wrap" id="acquisitionDom_List">
+                    <div class="top_box">
+                        <div class="Title_tab">
+                            采集配置    	
+                        </div>
+                        <button class="addNew_btn" onclick="acquisitionAdd()" style="position: relative; top: -28px;left: 84%;">
+                            添加
+                        </button>
+                        <input type="button"  rel="thirdPartyReport_mac" onclick="toUrl(this)" value='返回'  style="position: relative; top: -28px;left: 84%;" class="back_btn"/>
+                    </div>
+                   <div class="content_area">
+                        <div>
+                            <table width="100%" class="mytable">
+                                <thead>
+                               <tr class="th">
+                                    <td width="10">
+                                        序号
+                                    </td>
+                                    <td width="50">
+                                       网站名称
+                                    </td>
+                                    <td width="50">
+                                       网址
+                                    </td>
+                                    <td width="50">
+                                       标题参数
+                                    </td>
+                                    <td width="50">
+                                      下一页参数
+                                    </td>
+                                    <td width="50">
+                                       总页数
+                                    </td>
+                                    <td width="50">
+                                       采集频率
+                                    </td>
+                                    <td width="50">
+                                       采集类型
+                                    </td>
+                                     <td width="50">
+                                       创建时间
+                                    </td>
+                                    <td width="80" class="remRightBorder">
+                                       操作
+                                    </td>
+                                 </tr>
+                                </thead>
+                                <tbody id="acquisitionList">
+                                </tbody>
+                            </table>
+                            <!--分页-->
+                            <div id="acquisitionPaging" class="paging">
+                                <span class="pagingBtn" onclick="FirstPage_acquisition()" style="color:#bcbcbc;font-weight:bold;"> << </span>&nbsp;<span class="pagingBtn" onclick="PreviousPage_acquisition()" style="color:#bcbcbc;font-weight:bold;"> < </span>&nbsp;<span class="pageIndex">1</span>&nbsp;<span class="pagingBtn" onclick="NextPage_acquisition()" style="color:#2e6ab1;font-weight:bold;">
+                                        > </span>&nbsp;<span class="pagingBtn" onclick="EndPage_acquisition()" style="color:#2f6ab1;font-weight:bold;"> >> </span>&nbsp;
+                                <span>共<span class="pageCount">1</span>页， <span
+                                        class="dataCount">0</span>条数据。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--信息管理-第三方报告-报告采集配置-编辑-->
+                <div class="wrap" id="acquisitionDom_Edit">
+                    <div class="top_box">
+                        <div class="Title_tab">
+                            报告采集配置</div>
+                    </div>
+                    <div class="content_area">
+                        <table class="ThreeTextTab" id="acquisition_mytable">
+                            <tr class="twoTabNormal">
+                            <td class="tab_th">
+                                    <font>*</font>&nbsp;
+                                   网站名称：
+                                </td>
+                                <td class="tab_tr">
+                                    <input type="text" id="txt_siteName" placeholder="网站名称"/>
+                                </td>
+                                <td class="tab_th">
+                                    <font>*</font>&nbsp;
+                                    网站标题：
+                                </td>
+                                <td class="tab_tr">
+                                    <input type="text" id="txt_title" placeholder="网站标题"/>
+                                </td>
+                                <td class="tab_th">
+                                    网址：
+                                </td>
+                                <td class="tab_tr">
+                                    <input type="text" id="txt_siteLocation" placeholder="网址"/>
+                                </td>
+                                <td class="tab_th">
+                                    采集类型：
+                                </td>
+                                <td class="tab_tr">
+                                	<input type="text" id="txt_typeName" placeholder="采集类型"/>
+                                </td>
+                            </tr>
+                            <tr class="twoTabNormal">
+                                <td class="tab_th">
+                                    下一页：
+                                </td>
+                                <td class="tab_tr">
+                                    <input type="text" id="txt_next" placeholder="下一页"/>
+                                </td>
+                                <td class="tab_th">
+                                    时间参数：
+                                </td>
+                                <td class="tab_tr">
+                                	<input class="input_text" id="txt_Date" type="text" placeholder="时间参数" />
+                                </td>
+                                <td class="tab_th">
+                                    总页数：
+                                </td>
+                                <td class="tab_tr">
+                                    <input type="text" id="txt_pageTotal" placeholder="总页数,请输入整型数字" onkeyup="value=value.replace(/[^\d]/g,'')"/>
+                                </td>
+                                <td class="tab_th">
+                                    采集频率：
+                                </td>
+                                <td class="tab_tr">
+                                	<select id="op_frequency">
+                                		<option value="0">请选择</option>
+                                	</select>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="submitTab">
+                            <tr>
+                                <td>
+                                	<input type="hidden" id="hid_acquisitionId"/>
+                                    <input type="button" value="提 交" onclick="SaveAcquisition()" class="submit_btn"/>&nbsp;&nbsp;
+                                    <input type="button" value="返 回" rel="acquisitionDom_List" onclick="toUrl(this)" class="back_btn"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!--信息管理-评价-->
+                <div class="wrap" id="evaluate_mac">
+                    <div class="top_box">
+                        <div class="Title_tab">高级检索</div>
+                    </div>
+                    <div class="divSearch">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    &nbsp;关键字：
+                                    <input id="txt_evaluateKeyWords"  class="input_text" type="text" placeholder="请输入您要搜索的内容..." />
+                                    &nbsp;&nbsp;评价对象类别：
+                                    <select class="produceSel" id="evaluateType" onchange="indexObjChange()">
+                                        <option value="">请选择</option>
+                                        <option value="1">电商平台</option>
+                                        <option value="2">品牌</option>
+                                        <option value="3">品类</option>
+                                    </select>
+                                    <select style="height:35px;display:none;" id="proType">
+                                        <option>请选择</option>
+                                    </select>
+                                    <button class="sear_btn" onclick="GetEvaluateList(1,10)">搜索</button>
+                                    <button class="addNew_btn" onclick="addEvaluate()">添加</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="top_box">
+                        <div class="Title_tab">评价</div>
+                    </div>
+                    <div class="content_area">
+                        <div>
+                            <table width="100%" class="mytable">
+                                <thead>
+                                <tr class="th">
+                                    <td width="20">
+                                        序号
+                                    </td>
+                                    <td width="120">
+                                        评价对象
+                                    </td>
+                                    <td width="120">
+                                        连接
+                                    </td>
+                                    <td width="30">
+                                        评价对象类别
+                                    </td>
+                                    <td width="50">
+                                        综合得分
+                                    </td>
+                                    <td width="50">
+                                        操作
+                                    </td>
+                                </tr>
+                                </thead>
+                                <tbody id="evaluateManageList">
+                                </tbody>
+                            </table>
+                            <!--分页-->
+                            <div id="evaluatePaging" class="paging">
+                                <span class="pagingBtn" onclick="evaManFirstPage()" style="color:#bcbcbc;font-weight:bold;"> << </span>&nbsp;
+                                <span class="pagingBtn" onclick="evaManPreviousPage()" style="color:#bcbcbc;font-weight:bold;"> < </span>&nbsp;
+                                <span class="pageIndex">1</span>&nbsp;
+                                <span class="pagingBtn" onclick="evaManNextPage()" style="color:#2e6ab1;font-weight:bold;">> </span>&nbsp;
+                                <span class="pagingBtn" onclick="evaManEndPage()" style="color:#2e6ab1;font-weight:bold;"> >> </span>&nbsp;
+                                <span>共
+                                    <span class="pageCount">1</span>页，
+                                    <span class="dataCount">0</span>条数据。
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--信息管理-评价-新增-->
+                <div class="wrap" id="evaluate_add">
+                    <div class="top_box">
+                        <div class="Title_tab">
+                            新增评价</div>
+                    </div>
+                    <div class="content_area">
+                        <table class="ThreeTextTab">
+                            <tr class="twoTabNormal">
+                                <td class="tab_th">
+                                    <font>*</font>&nbsp;评价对象类型：
+                                </td>
+                                <td class="tab_tr">
+                                    <select style="height:35px;" onchange="evaluateObjChange()" id="txt_evaluateType">
+                                        <option value="0">请选择</option>
+                                        <option value="1">电商平台</option>
+                                        <option value="2">品牌</option>
+                                        <option value="3">品类</option>
+                                    </select>
+                                </td>
+                                <td class="tab_th" style="border:0px;">
+                                    <select style="height:35px;display: none;" id="txt_proType" onchange="evaluateIndexList()">
+                                        <option value="0">请选择</option>
+                                    </select>
+                                </td>
+                                <td class="tab_th">
+                                    <font>*</font>&nbsp;评价对象：
+                                </td>
+                                <td class="tab_tr">
+                                    <select id="txt_evaluateObj" onchange="proSelectTxt(1)">
+                                        <option value="0">请选择</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="mytable">
+                            <thead>
+                            <tr class="th">
+                                <td width="50">
+                                    序号
+                                </td>
+                                <td width="120">
+                                    指标
+                                </td>
+                                <td width="120">
+                                    权重
+                                </td>
+                                <td width="100">
+                                    得分
+                                </td>
+                            </tr>
+                            </thead>
+                            <tbody id="indexList">
+                            </tbody>
+                        </table>
+                        <table class="submitTab">
+                            <tr >
+                                <td>
+                                    <input type="button" value="提 交" onclick="SaveEvaluate()" class="submit_btn"/>
+                                    &nbsp;&nbsp;
+                                    <input type="button" value="返 回" rel="evaluate_mac" onclick="toUrl(this)" class="back_btn"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!--信息管理-评价-查看-->
+                <div class="wrap" id="evaluate_view">
+                    <div class="top_box">
+                        <div class="Title_tab">
+                            查看评价
+                        </div>
+                    </div>
+                    <div class="content_area">
+                        <table class="mytable">
+                            <thead>
+                            <tr class="th">
+                                <td width="100">
+                                    评价对象
+                                </td>
+                                <td width="50">
+                                    评价对象类别
+                                </td>
+                                <td width="50">
+                                    序号
+                                </td>
+                                <td width="120">
+                                    指标
+                                </td>
+                                <td width="120">
+                                    权重
+                                </td>
+                                <td width="100">
+                                    打分
+                                </td>
+                            </tr>
+                            </thead>
+                            <tbody id="indexViewList">
+                            </tbody>
+                        </table>
+
+                        <table class="submitTab">
+                            <tr >
+                                <td>
+                                    <input type="button" value="返 回" rel="evaluate_mac" onclick="toUrl(this)" class="back_btn"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+				<!-- 规则库管理（标准设定） 演示页面，极大可能改动 -->
+				<div class="wrap" id="ruleMonitor_mac">
+                    <div class="top_box">
+                        <div class="Title_tab">高级检索</div>
+                    </div>
+                    <div class="divSearch">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    &nbsp;关键字： <input class="input_text" id="txt_standardQuery" type="text" value="" />&nbsp;
+                                    <button class="sear_btn" onclick="GetStandardViewList('1')">查询</button>
+                                    <button class="addNew_btn" onclick="addStandard()">添加</button>
+                                </td>
+                                <td style="width: 120px;"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="top_box">
+                        <div class="Title_tab">检索结果</div>
+                    </div>
+                    <div class="content_area">
+                        <div>
+                            <table width="100%" class="mytable standardMainTable">
+                                <thead>
+                                <tr class="th">
+                                    <td width="50">ID</td>
+                                    <td width="120">规则库名称</td>
+                                    <td width="120">更新时间</td>
+                                    <td width="100">验证情况</td>
+                                    <td width="240">操作</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <!--分页-->
+                            <div id="standardsPaging" class="paging">
+                                <span class="pagingBtn" style="color: #bcbcbc; font-weight: bold;">&lt;&lt;</span>&nbsp;
+                                <span class="pagingBtn" style="color: #bcbcbc; font-weight: bold;">&lt;</span>&nbsp;
+                                <span class="pageIndex">1</span>&nbsp;
+                                <span class="pagingBtn" style="color: #2e6ab1; font-weight: bold;">&gt;</span>&nbsp;
+                                <span class="pagingBtn" style="color: #2e6ab1; font-weight: bold;">&gt;&gt;</span>&nbsp;
+								<span>共<span class="pageCount">1</span>页， <span class="dataCount">0</span>条数据。
+								</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 规则库预览 -->
+                <div class="wrap" id="standardPreview" style="display: block;">
+                    <span class="addPoint">规则信息预览</span>
+                    <div class="ui-tabs-panel">
+                        <table class="ThreeTextTab">
+                            <tbody><tr class="twoTabNormal">
+                                <td class="tab_th"> 规则集名称：</td>
+                                <td class="tab_tr name"></td>
+                                <td class="tab_th">依据标准：</td>
+                                <td class="tab_tr  agency"></td>
+                            </tr>
+                            <tr class="twoTabNormal">
+                                <td class="tab_th">状态：</td>
+                                <td class="tab_tr status"></td>
+                                <td class="tab_th">更新时间：</td>
+                                <td class="tab_tr updateTime"></td>
+                            </tr>
+                            <tr class="twoTabNormal">
+                                <td class="tab_th">备注：</td>
+                                <td class="tab_tr remark" colspan=3></td>
+                            </tr>
+                            </tbody></table>
+                    </div>
+                    <table class="submitTab">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <input type="button" value="返 回" rel="ruleMonitor_mac" onclick="toUrl(this)" class="back_btn"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 规则库编辑 -->
+                <div class="wrap" id="standardEdit" style="display: block;">
+                    <span class="addPoint">规则信息编辑</span>
+                    <div class="ui-tabs-panel">
+                        <table class="ThreeTextTab">
+                            <tbody>
+                            <tr class="twoTabNormal">
+                                <td class="tab_th"> 规则集名称：</td>
+                                <td class="tab_tr"><input type="text" class="name" /></td>
+                                <td class="tab_th">依据标准：</td>
+                                <td class="tab_tr"><input type="text" class="agency" /></td>
+                            </tr>
+                            <tr class="twoTabNormal">
+                                <td class="tab_th">状态：</td>
+                                <td class="tab_tr">
+                                    <select class="status">
+                                        <option value="0">未验证</option>
+                                        <option value="1">已验证</option>
+                                    </select>
+                                </td>
+                                <td class="tab_th">更新时间：</td>
+                                <td class="tab_tr"><input type="text" class="updateTime" /></td>
+                            </tr>
+                            <tr class="twoTabNormal">
+                                <td class="tab_th">备注：</td>
+                                <td class="tab_tr" colspan=3 style="width:100%;">
+                                    <textarea  class="remark" ></textarea>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <table class="submitTab">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <input type="hidden" id='hid_standardEditId'/>
+                                <input type="button" value="保 存" onclick="saveEditStandard()" class="submit_btn"/>
+                                <input type="button" value="返 回" rel="ruleMonitor_mac" onclick="toUrl(this)" class="back_btn"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 规则验证 -->
+                <div class="wrap" id="standardVerification" style="display: block;">
+                    <span class="addPoint">规则验证</span>
+                    <div class="ui-tabs-panel">
+                        <table class="ThreeTextTab">
+                            <tbody>
+                            <tr class="twoTabNormal">
+                                <td class="tab_th">商品名称：</td>
+                                <td class="tab_tr"><input type="text" class="productName"/></td>
+                                <td class="tab_tr"></td>
+                                <td class="tab_tr"></td>
+                            </tr>
+                            <tr class="twoTabNormal">
+                                <td class="tab_th">属性信息：</td>
+                                <td class="tab_tr"><input class="addNew_btn" type="button" value="   添 加" onclick="addStandardMaterial()" /></td>
+                                <td class="tab_tr"></td>
+                                <td class="tab_tr"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table class="ThreeTextTab verificationInfo">
+                            <thead>
+                            <tr class="twoTabNormal">
+                                <th>名称</th>
+                                <th>含量</th>
+                                <th>单位</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="twoTabNormal">
+                                <td class="tab_td"><input type="text" /></td>
+                                <td class="tab_td"><input type="text"/></td>
+                                <td class="tab_td"><input type="text"/></td>
+                                <td class="tab_td">&nbsp;&nbsp;<input class="back_btn" type="button" value="删  除" onclick="delStandardMaterial(this)" /></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table class="submitTab">
+                            <tbody>
+                            <tr>
+                                <td><input type="button" value="验 证" onclick="" class="back_btn checkStandard" style="right:0;left:auto"/></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="ThreeTextTab" style="margin-left:10%">
+                            <tbody>
+                            <tr class="twoTabArea">
+                                <td class="tab_th" style="width:6%;min-width:100px;">验证结果：</td>
+                                <td class="tab_tr" style="width:80%;"><textarea id="" class="addTextarea" readonly></textarea></td>
+                                <td class="tab_tr"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <table class="submitTab">
+                        <tbody>
+                        <tr>
+                            <td><input type="button" value="返 回" rel="ruleMonitor_mac" onclick="toUrl(this)" class="back_btn"/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 规则添加 演示用例 -->
+                <div class="wrap" id="StandardDom_Edit" style="display: block;">
+                    <div class="top_box">
+                        <div class="Title_tab">
+                            规则</div>
+                    </div>
+                    <div class="content_area">
+                        <div class="standardMenu" style="width: 18%;">
+                            <span class="title">规则列表</span><input type="button" value="  新增" class="addNew_btn" />
+                            <div class="standardMenuList" style="height:678px;overflow-y: auto;">
+                            </div>
+                        </div>
+                        <input type = "hidden" id="hid_standardId"/>
+                        <input type = "hidden" id="hid_standardRuleId"/>
+                        <div class="standardNormalTable">
+                             <table class="ThreeTextTab" id="ruleTable">
+                                <tbody>
+                                <tr class="twoTabNormal">
+                                    <td class="tab_th">规则名称：</td>
+                                    <td class="tab_tr"><input type="text" class="ruleName"  placeholder="请输入规则名称"/></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="twoTabNormal">
+                                    <td class="tab_th">类别：</td>
+                                    <td class="tab_tr">
+                                        <select class='ruleType'>
+                                            <option value='0'>配方</option>
+                                            <option value='1'>分类</option>
+                                            <option value='2'>父类</option>
+                                            <option value='3'>禁止商品</option>
+                                        </select>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr id="ownership-category" style="display:none;">
+                                    <td class="tab_th">归属类别：</td>
+                                    <td class="tab_tr">
+                                        <select class='ownershipType'>
+                                        </select>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr id="impact-category">
+                                    <td class="tab_th">影响类别：</td>
+                                    <td class="tab_tr">
+                                        <select class='effectType'>
+                                        </select>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr id="childName" style="height: 60%;display:none;">
+                                 	<td class="tab_th">子类名：</td>
+                                 	<td class="tab_tr">
+                                 		<select id="childClass" >
+                                 		</select>
+                                 	</td>
+                                    <td></td>
+                                </tr>
+                                <tr id="parentName" style="height: 60%;display:none;">
+                                 	<td class="tab_th">父类名：</td>
+                                 	<td class="tab_tr">
+                                 		<select id="fatherClass" >
+                                 		</select>
+                                 	</td>
+                                    <td></td>
+                                </tr>
+                                <tr id="AssistTr" style="display: none;visibility: hidden;">
+                                	<td class="tab_th"></td>
+                                    <td class="tab_tr"></td>
+                                    <td class="" style="width: 5%;"></td>
+                                    <td class="" style="width: 5%;"></td>
+                                    <td style="width: 5%;"></td>
+                                </tr>
+                                <tr id="KeyWordTr" class="fatherClass_" >
+                                    <td class="tab_th">关键字：</td>
+                                    <td class="tab_tr" style="width: 10%;">
+                                        <input type="text" class='keyWord' placeholder="请输入关键字"/>
+                                    </td>
+                                    <td style="width: 5%;">
+                                        <select class='materialRange'>
+                                        	<option value='1'>大于</option>
+                                            <option value='2'>小于</option>
+                                            <option value='3'>间于</option>
+                                            <option value='4'>外于</option>
+                                        </select>
+                                    </td>
+                                    <td id="AssistTd" style="width: 5%;display: none;"></td>
+                                </tr>
+                                <tr id="containsKeyWord" class="twoTabNormal" style="display: none;">
+                                	<td class="tab_th">关键字：</td>
+                                	<td class="tab_tr" style="width: 10%;">
+                                        <input type="text" class='contain' style="width: 80%;" placeholder="'包含',多关键字用逗号符分隔"/>*包含
+                                    </td>
+                                    <td class="tab_tr" style="width: 10%;">
+                                    </td>
+                                </tr>
+                                <tr id="discontainsKeyWord" class="twoTabNormal" style="display: none;">
+                                	<td class="tab_th"></td>
+                                	<td class="tab_tr" style="width: 10%;">
+                                        <input type="text" class='disContain' style="width: 80%;" placeholder="'不包含',多关键字用逗号符分隔"/>*不包含
+                                    </td>
+                                	<td class="tab_tr" style="width: 10%;"></td>
+                                </tr>
+                                <tr class="twoTabNormal">
+                                    <td class="tab_th">范围：</td>
+                                    <td class="tab_tr">
+                                        <input type="text" class='materialRangeBegin' placeholder="请输入配方含量" style="width:40%;" onkeyup="value=value.replace(/[^\d\.]/g,'')"/>
+                                        <span class='materialRangeMark'>&sim;</span>
+                                        <input type="text" class='materialRangeEnd' placeholder="请输入配方含量" style="width:40%;"  onkeyup="value=value.replace(/[^\d\.]/g,'')"/>
+                                    </td>
+                                </tr>
+                                <tr class="twoTabNormal">
+                                    <td class="tab_th">单位：</td>
+                                    <td class="tab_tr" >
+                                        <select class='materialRangeUnit'>
+                                        	<option value="kJ/100ml">kJ/100ml</option>
+                                        	<option value="μg/100kJ">μg/100kJ</option>
+                                        	<option value="g/100kJ">g/100kJ</option>
+                                        	<option value="mg/100kJ">mg/100kJ</option>
+                                        </select>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr class="twoTabNormal">
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <input type="button" value="保 存" class="back_btn saveStandardRule"/>
+                                        <input type="button" value="返 回" class="back_btn standardRuleReturn" />
+                                        <!-- <input type="button" value="删 除" class="back_btn delStandardRule" /> -->
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- 规则详情预览  开始-->
+						<div class="standardDetailPreview" style="display: none; width:77%; float:right;">
+			                    <span class="addPoint">规则详情预览</span>
+			                    <div class="ui-tabs-panel">
+			                    	<table class="ThreeTextTab">
+			                    		<tbody>
+			                    			<tr >
+			                    				<td class="tab_th"><span style="color: #CC0000;font-weight: bold;">"name":&nbsp;</span></td>
+			                    				<td class="tab_tr"><span style="color: #007777;" id="standardName"></span></td>
+			                    			</tr>
+			                    			<tr >
+			                    				<td class="tab_th"><span style="color: #CC0000;font-weight: bold;">"content":&nbsp;</span></td>
+			                    				<td class="tab_tr"><span style="color: #007777;" id="standardContent"></span></td>
+			                    			</tr>
+			                    			<tr class="twoTabNormal" align="center">
+			                                    <td colspan="2">
+			                                        <!-- <input type="button" value="返 回" class="back_btn standardRuleReturn" /> -->
+			                                        <input type="button" value="删 除" class="back_btn delStandardRule" />
+			                                    </td>
+			                                </tr>
+			                        	</tbody>
+			                    	</table>
+			                    </div>
+			            </div>
+						<!-- 规则详情预览 结束-->
+                    </div>
+                    <table class="submitTab">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <input type="button" value="返 回" rel="ruleMonitor_mac" onclick="toUrl(this)" class="back_btn"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--风险管理-->
+                <div class="wrap" id="riskManage_mac">
+                    <div class="top_box ">
+                        <div class="Title_tab" style="float: left; cursor: pointer;">风险管理</div>&nbsp;&nbsp;
+                        <div style="float: left; cursor: pointer;font-weight: bold;margin-top: 7px;margin-left: 5px;" onclick="getWebRisk(1,10)">网站风险</div>
+                    </div>
+                    <div class="content_area">
+                        <div>
+                            <table width="100%" class="mytable">
+                                <thead>
+                                <tr class="th">
+                                    <td width="50">
+                                        序号
+                                    </td>
+                                    <td width="100">
+                                        商品信息
+                                    </td>
+                                    <td width="100">
+                                        商品链接
+                                    </td>
+                                    <td width="100">
+                                        跨境电商
+                                    </td>
+                                    <td width="100">
+                                        预警时间
+                                    </td>
+                                    <td width="100">
+                                        风险指数
+                                    </td>
+                                    <td width="100">
+                                        建议
+                                    </td>
+                                </tr>
+                                </thead>
+                                <tbody id="riskManage_macList">
+                                </tbody>
+                            </table>
+                            <!--分页-->
+                            <div id="riskManage_macPaging" class="paging">
+                                <span class="pagingBtn" onclick="riskManFirstPage()" style="color:#bcbcbc;font-weight:bold;"> << </span>&nbsp;
+                                <span class="pagingBtn" onclick="riskManPreviousPage()" style="color:#bcbcbc;font-weight:bold;"> < </span>&nbsp;
+                                <span class="pageIndex">1</span>&nbsp;
+                                <span class="pagingBtn" onclick="riskManNextPage()" style="color:#2e6ab1;font-weight:bold;">> </span>&nbsp;
+                                <span class="pagingBtn" onclick="riskManEndPage()" style="color:#2e6ab1;font-weight:bold;"> >> </span>&nbsp;
+                                <span>共
+                                    <span class="pageCount">1</span>页，
+                                    <span class="dataCount">0</span>条数据。
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--风险管理-网站风险list-->
+				<div class="wrap" id="WebRiskManage_mac">
+                    <div class="top_box">
+                        <div style="float: left; cursor: pointer;font-weight: bold;margin-top: 7px;margin-right: 5px;"rel="riskManage_mac"  onclick="toUrl(this)">风险管理</div>&nbsp;&nbsp;
+                        <div class="Title_tab" style="float: left; cursor: pointer;">网站风险</div>
+                    </div>
+                    <div class="content_area">
+                        <div>
+                            <table width="100%" class="mytable">
+                                <thead>
+                                <tr class="th">
+                                    <td width="50">
+                                        序号
+                                    </td>
+                                    <td width="100">
+                                        网站名称
+                                    </td>
+                                    <td width="100">
+                                       安全指数
+                                    </td>
+                                    <td width="100">
+                                        建议
+                                    </td>
+                                </tr>
+                                </thead>
+                                <tbody id="WebRiskManage_macList">
+                                </tbody>
+                            </table>
+                            <!--分页-->
+                            <div id="WebRiskManage_macPaging" class="paging">
+                                <span class="pagingBtn" onclick="WebRiskManFirstPage()" style="color:#bcbcbc;font-weight:bold;"> << </span>&nbsp;
+                                <span class="pagingBtn" onclick="WebRiskManPreviousPage()" style="color:#bcbcbc;font-weight:bold;"> < </span>&nbsp;
+                                <span class="pageIndex">1</span>&nbsp;
+                                <span class="pagingBtn" onclick="WebRiskManNextPage()" style="color:#2e6ab1;font-weight:bold;">> </span>&nbsp;
+                                <span class="pagingBtn" onclick="WebRiskManEndPage()" style="color:#2e6ab1;font-weight:bold;"> >> </span>&nbsp;
+                                <span>共
+                                    <span class="pageCount">1</span>页，
+                                    <span class="dataCount">0</span>条数据。
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				
+                <!--专家知识库-智能对话-->
+                <div class="wrap" id="intelligentDialogue_mac">
+                    <div class="top_box">
+                       <div class="Title_tab">
+                             智能对话
+                       </div>
+                    </div>
+                    <div class="content_area">
+                        <div>
+                            <div class="talk">
+                                <div class="talk_record" id="talk_record">
+                                    <div id="jp-container" class="jp-container">
+
+                                    </div>
+                                </div>
+                                <div class="talk_word">
+                                    &nbsp;
+                                    <input class="messages emotion" id="message" placeholder="在这里输入文字"   />
+                                    <input class="talk_send" type="button" title="发送" value="发送" onclick="doSend()"/>
+                                    <input class="talk_send" type="button"  value="清空" onclick="doClean()"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--规则监测-对话记录-->
+                <div class="wrap" id="dialogueRecord_mac">
+                    <div class="top_box">
+                        <div class="Title_tab">
+                            高级检索</div>
+                    </div>
+                    <div class="divSearch">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    &nbsp;关键字：
+                                    <input class="input_text" id="txt_dialogueQuery" type="text" placeholder="请输入您要搜索的内容..." />
+                                    &nbsp;创建日期：
+                                    <input class="input_text" id="txt_dialogueDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+                                           type="text" placeholder="开始日期" />
+
+                                    <button class="sear_btn" onclick="dialogueRecordList(1)">
+                                        查询</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="top_box">
+                        <div class="Title_tab">
+                            对话记录</div>
+                    </div>
+                    <div class="content_area">
+                        <div id="diaRecList">
+                            
+                        </div>
+
+                        <div id="dialogueRecordPaging" class="paging">
+                            <span class="pagingBtn" onclick="diaRecFirstPage()" style="color:#bcbcbc;font-weight:bold;"> << </span>&nbsp;
+                            <span class="pagingBtn" onclick="diaRecPreviousPage()" style="color:#bcbcbc;font-weight:bold;"> < </span>&nbsp;
+                            <span class="pageIndex">1</span>&nbsp;
+                            <span class="pagingBtn" onclick="diaRecNextPage()" style="color:#2e6ab1;font-weight:bold;">> </span>&nbsp;
+                            <span class="pagingBtn" onclick="diaRecEndPage()" style="color:#2e6ab1;font-weight:bold;"> >> </span>&nbsp;
+                                <span>共
+                                    <span class="pageCount">1</span>页，
+                                    <span class="dataCount">0</span>条数据。
+                                </span>
+                        </div>
+                    </div>
+                  </div>
+            	
+            </div>
+            
+            <div class="clr"></div>
+        </div>
+        <div class="footer">
+            技术支持：<strong>Strong</strong> <b>IT</b>&nbsp;&nbsp; 日期： <span id="lblDate" style="color: Red;
+                font-weight: bold;"></span>
+        </div>
+    </div>
+    <div id="messgeBox">
+        <div class="mbTitle">
+            消息</div>
+        <div class="mbContent">
+        </div>
+    </div>
+    <div id="bg">
+    </div>
+    <div id="show">
+		<div class="title_box">
+			<b style="margin-left:10px;">信息提示</b>	
+		</div>
+		<div  class="content_box">
+			<div  class="dele_box">
+			
+			</div>
+			<div class="words_area">
+				<strong id="wordsarea">确定要删除吗?</strong>
+				<p style="color:#9e9f9f">如果是请点击确定按钮，否则点击取消</p>
+			</div>
+			<div class="btn_box">
+			 <input id="btnCloseSure" type="button" style="background:#2091cf;border:1px #007bc8 solid;border-radius:4px;color:#fff;"  value="确定" class="delSure"/>
+			 <input id="btnCloseCancel" type="button" value="取消" style="border:1px #bbb solid;border-radius:4px;margin-left:15px;"/>
+            </div>
+		</div>
+       <!--  <span>
+            <img src="images/alert_pic.png"><a style="color: white; font-weight: bold;">信息提示</a></span>
+        <div class="box2">
+            <span>
+                <img src="images/delete_pic.png" style="vertical-align: middle;"><a style="font-weight: bold;
+                    margin: 5px 0 0 5px;">警告：确定要删除吗？</a></span>
+            <div class="btn_box">
+        			 <input id="btnCloseSure" type="button" style="background:#2091cf;border:1px #007bc8 solid;color:#fff;"  value="确定" class="delSure"/>
+        			 <input id="btnCloseCancel" type="button" value="取消" style="border:1px #bbb solid;margin-left:15px;"/>
+            </div>
+        </div> -->
+    </div>
+	<!--show alert message,added by liqiuling-->
+    <div id="showAlert">
+		<div class="title_box">
+			<b style="margin-left:10px;">信息提示</b>	
+		</div>
+		<div class="content_box">
+			<div class="words_alert" id="alertText">
+				确定要删除吗?
+			</div>
+			<div class="btn_box">
+			 <input id="btnCloseSureAlert" type="button" style="background:#2091cf;border:1px #007bc8 solid;border-radius:4px;color:#fff;"  value="确定" class="delSure"/>
+            </div>
+		</div>
+    </div>
+    <div id="loading1">
+		<div id="" class="title_box">
+			<b style="margin-left:10px;">温馨提示</b>	
+		</div>
+		<div id="" class="content_box">
+			<div id="" class="loading_box">
+			
+			</div>
+			<div id="" class="words_area">
+				<strong style="color:#9e9f9f">结果正飞奔而来，请稍后...</strong>
+			</div>
+		</div>
+        <!-- <span>
+            <img src="images/alert_pic.png"><a style="color: white; font-weight: bold;">温馨提示</a></span>
+        <div class="box2">
+            <img src="images/loading_pic.gif" style="margin: 10px 0 0 100px;">
+            <span style="font-weight: bold; margin: 10px 0 0 50px; color: #499ccc;">正在拼命加载中，请稍后...</span>
+        </div> -->
+    </div>
+    <div id="checkTaskShow">
+        <div id="checkTaskTitle">
+			<span>测试结果页面</span>
+			<ul class="operateDo">
+				<li>
+					<a href="#" onclick="hideCheckTaskdiv();"><img src="images/delete_data.png"/></a>
+				</li>
+				<li>
+					<a href="#" onclick="maxSizeCheckTaskdiv();"><img src="images/fangda.png"/></a>
+				</li>
+				<li>
+					<a href="#" onclick="minSizeCheckTaskdiv();"><img src="images/suoxiao.png"/></a>
+				</li>
+			</ul>
+		</div>
+        <div class="content">
+        </div>
+    </div>
+    
+     <script src="./js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="js/jsTree/jquery.jstree.js" type="text/javascript"></script>
+    <script src="js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+   <!--  <script src="js/publicLogin.js" type="text/javascript"></script> -->
+    <script src="machineLearnJs/BaseJS.js" type="text/javascript"></script>
+    <script src="js/FusionCharts/FusionCharts.js" type="text/javascript"></script>
+
+	<!-- add by liqiuling-->
+    <script src="js/jquery.validate.js" type="text/javascript"></script>
+    <script src="js/messages_zh.js" type="text/javascript"></script>
+	<!-- 商品管理-目录管理-->
+    <script src="machineLearnJs/product_menu.js" type="text/javascript"></script>
+    <!-- 商品管理-标准产品管理-->
+    <script src="machineLearnJs/standard_product_man.js" type="text/javascript"></script>
+    <!--信息管理-舆情-->
+    <script src="machineLearnJs/public_option_event.js" type="text/javascript"></script>
+    <!-- 第三方报告 -->
+	<script src="machineLearnJs/thirdPartyReportJS.js" type="text/javascript"></script>
+    <!--信息管理-评价-->
+    <script src="machineLearnJs/information_evaluate.js" type="text/javascript"></script>
+    <!-- 风险管理 -->
+    <script src="machineLearnJs/risk_management.js" type="text/javascript"></script>
+    <!-- 专家知识库 -->
+    <script src="machineLearnJs/intelligent_dialogue.js" type="text/javascript"></script>
+    
+    <!-- 商品管理-商品管理 add by tanshumei -->
+    <script src="machineLearnJs/machine_goodsManage.js" type="text/javascript"></script>
+    <!-- 商品管理-网站管理  -->
+    <script src="machineLearnJs/websiteManage.js" type="text/javascript"></script>
+    <!-- 基础数据- 网站管理 -区域-国家-地区列表-->
+    <script src="js/BrandCountryJS.js" type="text/javascript"></script>
+    <!-- 规则监测-规则监测  -->
+    <script src="machineLearnJs/machine_standard.js" type="text/javascript"></script>
+</body>
+</html>

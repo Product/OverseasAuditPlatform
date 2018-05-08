@@ -1,0 +1,933 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- HTML5 元素和 CSS 属性正常使用-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<title>跨境电商风险分析平台</title>
+<!--为了让 Bootstrap 开发的网站对移动设备友好，确保适当的绘制和触屏缩放-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- 引入bootstrap-->
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/jquery.dataTables.min.css" />
+<!-- 自定义css-->
+<link rel="stylesheet" href="css/dashTest.css" />
+
+<!-- 引入jQuery和bootstrap-->
+<script src="js/jquery-2.0.0.min.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+
+<!-- DataTables -->
+<script src="js/jquery.dataTables.min.js"></script>
+<!--Google地图 -->
+<!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false"></script>-->
+<script src="js/mapJS.js" type="text/javascript"></script>
+<!-- 引入echarts-->
+<script src="build/dist/echarts.js"></script>
+<!-- 对echarts进行配置-->
+<script src="js/worldMap.js"></script>
+<!-- 自定义js-->
+<script src="js/indexBase.js?v=20170601"></script>
+<script src="js/RegulatoryJS.js"></script>
+<script src="js/DetectingSuggestJS.js" type="text/javascript"></script>
+<script src="js/EventAffectedMapJS.js"></script>
+<script src="js/EpidemicAffectedMapJS.js"></script>
+<script src="js/ExcelShowJS.js"></script>
+<script src="js/StandardDashBoardJS.js"></script>
+<script src="js/RealTimeMonitoringJS.js"></script>
+<!-- 信息管理- 信息发布-->
+<script type="text/javascript" src="js/information_publishjs.js"></script>
+
+
+</head>
+<body>
+	<div class="navbar navbar-default" role="navigation">
+		<div class="navbar-inner">
+			<span class="navbar-brand"
+				style="margin-left: 50px; font-weight: bold; font-size: 23px;">
+				海淘风险分析平台 </span>
+			<!--  <a class="navbar-brand">
+				<i class="glyphicon glyphicon-align-justify"></i>
+            </a>
+            <!-- user dropdown starts -->
+			<!-- <div class="btn-group pull-right">
+				<button class="btn btn-default dropdown-toggle"
+					data-toggle="dropdown">
+					<i class="glyphicon glyphicon-user"></i><span
+						class="hidden-sm hidden-xs">登录</span> <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a href="main.html">登录</a></li>
+
+				</ul>
+			</div> -->
+		</div>
+	</div>
+	<!-- left menu starts-->
+	<div class="navbar-default sidebar" role="navigation">
+		<div class="sidebar-nav navbar-collapse">
+			<ul class="nav" id="side-menu">
+				<!-- <li class="open" rel="chargeCon"><a
+					onclick="$('#hid_pageStatus').val('0');checkStatus();"><i
+						class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;监管情况纵览</a></li>
+				<li rel="checkCon"><a
+					onclick="$('#hid_pageStatus').val('1');checkStatus();"><i
+						class="glyphicon glyphicon-eye-open"></i>&nbsp;&nbsp;样品检测建议</a></li> -->
+				<!-- 疫情影响纵览，测试需要，暂时隐藏 -->
+               <!--  <li rel="epidemicCon"><a onclick="$('#hid_pageStatus').val('2');"><i class="glyphicon glyphicon-edit"></i>&nbsp;&nbsp;疫情影响纵览</a> </li>  -->
+				<!-- <li rel="eventCon"><a
+					onclick="$('#hid_pageStatus').val('3');checkStatus();"><i
+						class="glyphicon glyphicon-list-alt"></i>&nbsp;&nbsp;事件影响纵览</a></li> -->
+				<!-- <li><a class="subCollapse" href="#"><i class="glyphicon glyphicon-font"></i>&nbsp;&nbsp;统计分析<span class="caret"></span></a>
+                				    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <a href="#">Panels and Wells</a>
+                        </li>
+                        <li>
+                            <a href="#">Buttons</a>
+                        </li>
+                        <li>
+                            <a href="#">Notifications</a>
+                        </li>
+                    </ul>
+                </li>  -->
+                <li rel="realTimeMonitoringCon"><a
+					onclick="$('#hid_pageStatus').val('5');"><i
+						class="glyphicon glyphicon-search"></i>&nbsp;&nbsp;实时检测</a></li>
+				<li rel="standardCon"><a
+					onclick="$('#hid_pageStatus').val('4');checkStatus();"><i
+						class="glyphicon glyphicon-th-large"></i>&nbsp;&nbsp;标准匹配</a></li>
+				<li rel="informationCon"><a
+					onclick="$('#hid_pageStatus').val('6');checkStatus();"><i
+					class="glyphicon glyphicon-list-alt"></i>&nbsp;&nbsp;信息发布</a></li>
+			</ul>
+		</div>
+		<input type="hidden" id="hid_moduleInfo"/>
+	</div>
+	<div id="menuHide">
+	</div>
+	<div id="page-wrapper">
+		<div class="page-wrapper-inner">
+			<div class="row" id="unstandard_page">
+				<div class="box col-md-12">
+					<div class="box-inner">
+						<div class="box-header well">
+							<h2>
+								<span><i class="glyphicon glyphicon-search"></i>&nbsp;&nbsp;搜索条件</span>
+							</h2>
+						</div>
+						<div class="box-content" id="EventAffectSearch">
+							<form role="form" class="form-horizontal">
+								<div class="form-group" id="productType">
+									<label class="col-sm-2 control-label">商品种类选择</label>
+									<div class="col-lg-2">
+										<select class="form-control" id="firstSel">
+											<option value="0">请选择</option>
+										</select>
+									</div>
+									<div class="col-lg-2">
+										<select class="form-control" id="secondSel">
+											<option value="0">请选择</option>
+										</select>
+									</div>
+									<div class="col-lg-2">
+										<select class="form-control" id="thirdSel">
+											<option value="0">请选择</option>
+										</select>
+									</div>
+									<button type="button" class="btn btn-info btn-sm btnSure"
+										id="choiceSure">确定</button>
+								</div>
+								<div class="form-group chioceShow" id="chioceShow">
+									<label class="col-sm-2 control-label">商品描述：</label>
+									<div class="col-lg-10 chioceDisplay" id="chioceDisplay"></div>
+								</div>
+
+								<div class="form-group content-hide" id="dangerType">
+									<label class="col-sm-2 control-label">风险种类选择</label>
+									<div class="col-lg-4">
+										<label class="checkbox-inline"><input type="radio"
+											name="csa" checked="checked" value="0" id="extractAllRadio"
+											onclick="ExtractAll(this)" />全部</label> <label
+											class="checkbox-inline"><input type="radio"
+											name="csa" value="1" id="extractEventRadio"
+											onclick="ExtractEvent(this)" />舆情关注</label> <label
+											class="checkbox-inline"><input type="radio"
+											name="csa" value="2" id="extractGradeRadio"
+											onclick="ExtractGrade(this)" />诚信评价</label>
+									</div>
+								</div>
+								<div class="form-group content-hide" id="eventKeyWord">
+									<label class="col-sm-2 control-label">事件关键字</label>
+									<div class="col-lg-3">
+										<input type="text" class="form-control" id="txt_eventKeyWord"
+											text="" style="ime-mode: disabled;" />
+									</div>
+								</div>
+								<div class="form-group content-hide" id="evaluationRange">
+									<label class="col-sm-2 control-label">诚信评价分数范围</label>
+									<div class="col-lg-2">
+										<input type="text" class="form-control"
+											id="txt_evaluationRangeMin" text=""
+											style="ime-mode: disabled;"
+											onkeyup="value=value.replace(/[^\d]/g,'') "
+											onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" />
+									</div>
+									<div class="col-lg-1 spanSel">到</div>
+									<div class="col-lg-2">
+										<input type="text" class="form-control"
+											id="txt_evaluationRangeMax" text=""
+											style="ime-mode: disabled;"
+											onkeyup="value=value.replace(/[^\d]/g,'') "
+											onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" />
+									</div>
+								</div>
+								<div class="form-group content-hide" id="dangerType2">
+									<label class="col-sm-2 control-label">推荐检测数量</label>
+									<div class="col-lg-3">
+										<input type="text" class="form-control" id="txt_suggestNum"
+											style="ime-mode: disabled;"
+											onkeyup="value=value.replace(/[^\d]/g,'') "
+											onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"
+											placeholder="不填默认1000" />
+									</div>
+								</div>
+
+								<div class="form-group content-hide" id="epidemicTime">
+									<label class="col-sm-2 control-label">疫情发生时间</label>
+									<div class="col-lg-10">
+										<label class="timeSelect"><input type="radio"
+											name="epidemicTime" value="1" checked="checked" />最近一天</label> <label
+											class="timeSelect"><input type="radio"
+											name="epidemicTime" value="3" />最近三天</label> <label
+											class="timeSelect"><input type="radio"
+											name="epidemicTime" value="7" />最近七天</label> <label
+											class="timeSelect"><input type="radio"
+											name="epidemicTime" value="自定义" />自定义时间</label> <label
+											class="timeContent"> <label class="checkbox-inline">
+												<input id="timeStart" class="form-control input-sm"
+												type="text" name="" value="" />
+										</label> <label class="addTo">至</label> <label class="checkbox-inline">
+												<input id="timeEnd" type="text"
+												class="form-control input-sm" name="" value="" />
+										</label>
+										</label>
+									</div>
+								</div>
+
+								<div class="form-group content-hide" id="epidemicKey">
+									<label class="col-sm-2 control-label">疫情关键字</label>
+									<div class="col-lg-3">
+										<input class="form-control" type="text" name="" value="" />
+									</div>
+									<label class="col-sm-2 control-label">疫情类型</label>
+									<div class="col-lg-3">
+										<select class="form-control" id="epidemicType">
+											<option selected value=''>全部</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group content-hide" id="eventTime">
+									<label class="col-sm-2 control-label">事件发生时间</label>
+									<div class="col-lg-10">
+
+										<label class="timeSelect"><input type="radio"
+											name="eventTime" value="1" checked="checked" />最近一天</label> <label
+											class="timeSelect"><input type="radio"
+											name="eventTime" value="3" />最近三天</label> <label class="timeSelect"><input
+											type="radio" name="eventTime" value="7" />最近七天</label> <label
+											class="timeSelect"><input type="radio"
+											name="eventTime" value="自定义" />自定义时间</label> <label
+											class="timeContent"> <label class="checkbox-inline">
+												<input id="timeStartEvent" class="form-control input-sm"
+												type="text" name="" value="" />
+										</label> <label class="addTo">至</label> <label class="checkbox-inline">
+												<input id="timeEndEvent" type="text"
+												class="form-control input-sm" name="" value="" />
+										</label>
+										</label>
+									</div>
+								</div>
+
+								<div class="form-group content-hide" id="eventKey">
+									<label class="col-sm-2 control-label">事件关键字</label>
+									<div class="col-lg-3">
+										<input class="form-control" type="text" id="txt_eventQuery"
+											value="" />
+									</div>
+									<label class="col-sm-2 control-label">事件类型</label>
+									<div class="col-lg-3">
+										<select class="form-control" id="eventType">
+											<option selected value="">全部</option>
+										</select>
+									</div>
+								</div>
+								<!--   
+			  <div class="form-group content-hide standardMatch">
+			  	<label class="col-sm-2 control-label">标准</label>
+				<div class="col-lg-3">
+					<select class="form-control standard">
+						<option selected value="0">请选择</option>
+					</select>
+				</div>
+			  </div>
+			  <div class="form-group content-hide standardMatch">
+				<label class="col-sm-2 control-label">匹配情况</label>
+				<div class="col-lg-3">
+					<select class="form-control">
+						<option selected value="">不匹配</option>
+					</select>
+				</div>
+			  </div> -->
+
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-lg-3">
+										<button type="button" onclick="queryData()"
+											class="btn btn-success btn-sm">搜索</button>
+										<button type="button" id="importSuggest"
+											onclick="queryImport()" class="btn btn-success btn-sm"
+											style="display: none;">导出</button>
+										<button type="button" class="btn btn-warning btn-sm">取消</button>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="box-content" id="EventExactInfo">
+							<div id="EventInfoShow" class="excelShow"
+								style="min-height: auto">
+								<table cellpadding="0" cellspacing="0" border="0"
+									class="display" style="width: 100%">
+									<thead>
+										<tr>
+											<th>*</th>
+											<th>事件名称</th>
+											<th>影响原料</th>
+											<th>影响地区</th>
+											<th>影响品牌</th>
+											<th>影响类型</th>
+											<th>影响网站</th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+							<div class="form-group" style="height: 40px">
+								<div class="col-sm-offset-2 col-lg-3">
+									<button type="button" onclick="queryData()"
+										class="btn btn-success btn-sm">搜索</button>
+									<button type="button" onclick="gobacktoEventAffect()"
+										class="btn btn-warning btn-sm">返回</button>
+								</div>
+							</div>
+						</div>
+						<input type="hidden" id="hid_eventAffect" />
+					</div>
+				</div>
+			</div>
+			<div id="typeGroup" class="row">
+				<div class="col-lg-13 col-md-13 col-sm-13col-xs-13 "
+					onclick="setProductDefineParams()">
+					<div class="databox bg-fifth">
+						<div class="databox-left bg-fifthTheme">
+							<div class="databox-piechart">
+								<span class="glyphicon glyphicon-signal"></span>
+							</div>
+						</div>
+						<div class="databox-right">
+							<span class="databox-number font-fifth" id="productDefineNum"></span>
+							<div class="databox-text">产品数量</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-13 col-md-13 col-sm-13 col-xs-13"
+					onclick="setWebsiteParams()">
+					<div class="databox bg-first">
+						<div class="databox-left bg-themesecondary">
+							<div class="databox-piechart">
+								<span class="glyphicon glyphicon-align-left"></span>
+							</div>
+						</div>
+						<div class="databox-right">
+							<span class="databox-number font-first" id="websiteNum">234</span>
+							<div class="databox-text">网站数量</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-13 col-md-13 col-sm-13col-xs-13 "
+					onclick="setProductParams()">
+					<div class="databox bg-second">
+						<div class="databox-left bg-secondTheme">
+							<div class="databox-piechart">
+								<span class="glyphicon glyphicon-signal"></span>
+							</div>
+						</div>
+						<div class="databox-right">
+							<span class="databox-number font-second" id="productNum">34</span>
+							<div class="databox-text">商品数量</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-13 col-md-13 col-sm-13 col-xs-13"
+					onclick="setProductTypeParams()">
+					<div class="databox bg-third">
+						<div class="databox-left bg-thirdTheme">
+							<div class="databox-piechart">
+								<span class="glyphicon glyphicon-list-alt"></span>
+							</div>
+						</div>
+						<div class="databox-right">
+							<span class="databox-number font-third" id="productTypeNum">123</span>
+							<div class="databox-text">产品类别</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-13 col-md-13 col-sm-13 col-xs-13"
+					onclick="setBrandParams()">
+					<div class="databox bg-forth">
+						<div class="databox-left bg-forthTheme">
+							<div class="databox-piechart">
+								<span class="glyphicon glyphicon-file"></span>
+							</div>
+						</div>
+						<div class="databox-right">
+							<span class="databox-number font-forth" id="brandNum">2340</span>
+							<div class="databox-text">品牌数量</div>
+						</div>
+					</div>
+				</div>
+				<input type="hidden" id="hid_subModuleInfo" />
+			</div>
+
+			<!-- 标准匹配 -->
+			<div id="standard_page" class="content-hide">
+				<div class="row">
+					<div class="box col-md-12">
+						<div class="box-inner">
+							<div class="box-header well">
+								<h2>
+									<span><i class="glyphicon glyphicon-search"></i>&nbsp;&nbsp;搜索条件</span>
+								</h2>
+							</div>
+							<div class="box-content">
+								<form role="form" class="form-horizontal">
+									<div class="form-group" id="productType">
+										<label class="col-sm-2 control-label">商品种类选择</label>
+										<div class="col-lg-2">
+											<select class="form-control firstSel">
+												<option value="0" selected='selected'>请选择</option>
+											</select>
+										</div>
+										<div class="col-lg-2">
+											<select class="form-control secondSel">
+												<option value="0" selected='selected'>请选择</option>
+											</select>
+										</div>
+										<div class="col-lg-2">
+											<select class="form-control thirdSel">
+												<option value="0">请选择</option>
+											</select>
+										</div>
+										<button type="button"
+											class="btn btn-info btn-sm btnSure choiceSure">确定</button>
+									</div>
+									<div class="form-group chioceShow">
+										<label class="col-sm-2 control-label">商品描述：</label>
+										<div class="col-lg-10 chioceDisplay"></div>
+									</div>
+
+									<div class="form-group standardMatch">
+										<label class="col-sm-2 control-label">标准</label>
+										<div class="col-lg-3">
+											<select class="form-control standard" id='ddl_standardName'>
+												<option value="0">全部</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group standardChioceShow">
+										<label class="col-sm-2 control-label">标准描述</label>
+										<div class="col-lg-10 standardChioceDisplay"></div>
+									</div>
+									<div class="form-group standardMatch">
+										<label class="col-sm-2 control-label">匹配情况</label>
+										<div class="col-lg-3">
+											<select class="form-control">
+												<option value="">不匹配</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="col-sm-offset-2 col-lg-3">
+											<button type="button" class="btn btn-success btn-sm load" style="display: none">加载</button>
+											<button type="button" class="btn btn-success btn-sm select">搜索</button>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div>
+								<button type='button' style="margin-left: 10px;"
+									onclick='delSelectedMismatchStandard(this)' rel="standard_page"
+									class='btn btn-success btn-sm'>删除所选</button>
+							</div>
+							<div class="box-content">
+								<table class="table dataTable productList" page="standard_page">
+									<thead>
+										<tr>
+											<th  style="padding-left: 10px;width:8%"><input type='checkbox'
+												class='mismatchStandards' />&nbsp;全选</th>
+											<th style="width:10%">商品名称</th>
+											<th style="width:10%">来源网站</th>
+											<th style="width:25%">网址</th>
+											<th style="width:32%">不匹配内容</th>
+											<th style="width:15%">操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td colspan="6" style="text-align: center;">暂无数据</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="productPaging">
+									<ul class="pagination pagination-centered"
+										style="margin-left: 10px;">
+										<li><a class="firstPage">首页</a></li>
+										<li><a class="previousPage">前一页</a></li>
+										<li><a class="pageIndex">1</a></li>
+
+										<li><a class="nextPage">后一页</a></li>
+										<li><a class="endPage">尾页</a></li>
+
+									</ul>
+									<div class="pull-right" style="margin: 20px">
+										共<span class="pageSpan pageCount">1</span>页，<span
+											class="pageSpan dataCount">0</span>条数据
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 信息发布 -->
+			<div id="information_publish" class="content-hide">
+				<div class="row" style="height:100%">
+					<div class="box col-md-12" style="height:100%">
+						<div class="box-inner">
+							<div class="box-content">
+								<input class="input_text" id="key_word" type="hidden"/>
+								<table class="table dataTable productList" page="standard_page" >
+									<thead>
+									<tr>
+										<th colspan="2">即时新闻 </th>
+									</tr>
+									</thead>
+									<tbody id="info_list">
+										<tr>
+											<td  colspan="2" style="text-align: center;">暂无数据</td>
+										</tr>
+									</tbody>
+								</table>
+								<div  id="infoPaging" class="productPaging">
+									<ul class="pagination pagination-centered"
+										style="margin-left: 10px;">
+										<li><a class="firstPage" onclick="InfoFirstPage()">首页</a></li>
+										<li><a class="previousPage" onclick="InfoPreviousPage()">前一页</a></li>
+										<li><a class="pageIndex">1</a></li>
+										<li><a class="nextPage" onclick="InfoNextPage()">后一页</a></li>
+										<li><a class="endPage" onclick="InfoEndPage()">尾页</a></li>
+									</ul>
+									<div class="pull-right" style="margin: 20px">
+										共<span class="pageSpan pageCount">1</span>页，<span
+											class="pageSpan dataCount">0</span>条数据
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--信息管理-信息发布-查看-->
+			<div class="content-hide" id="information_detail">
+				<div class="row" style="height:100%">
+					<div class="box col-md-12" style="height:100%">
+						<div class="box-inner">
+							<div class="box-header well">
+								<h2>
+									<span>&nbsp;&nbsp;信息发布详情</span>
+								</h2>
+							</div>
+							<div class="box-content">
+								<div id="content_title" class="info_title"></div>
+								<div class="info_author">
+									<span id="content_author" style="margin-right: 20px;"></span>
+									<span id="content_time"></span>
+								</div>
+								<div class="info_type">
+									<span id="content_type" style="margin-right: 20px;"></span>
+									<span id="content_keyword"></span>
+								</div>
+								<div id="content_content" class="info_content"></div>
+							</div>
+							<table class="submitTab">
+								<tr>
+									<td>
+										<input type="button" value="返 回"  onclick="info_back()" class="btn btn-default btn-sm"/>
+									</td>
+								</tr>
+								<tr><td>&nbsp;</td></tr>
+							</table>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+			<!-- 不匹配标准的商品配料详细展示 -->
+			<div class="content-hide" id="standardContents"
+				style="display: block;">
+				<div class="row">
+					<div class="box col-md-12">
+						<div class="box-inner">
+							<div class="box-header well">
+								<h4 class="modal-title">
+									<span class="modal-title-span">不匹配的配料</span>
+								</h4>
+							</div>
+							<div class="modal-body">
+								<button type="button" class="btn btn-info btn-sm pull-right btn_Close" rel="standard_page">返回</button>
+								<div class="form-group">
+									<table class="table dataTable" style="width: 100%">
+										<thead>
+											<tr>
+												<th>配料名称</th>
+												<th>标准含量</th>
+												<th>本品含量</th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 标准匹配-查看类似 -->
+			<div id="similarStandard_page" class="content-hide">
+				<div class="row">
+					<div class="box col-md-12">
+						<div class="box-inner">
+							<div class="box-header well">
+								<h2>
+									<span>查看类似</span>
+								</h2>
+							</div>
+							<div>
+								<button type='button' style="margin-left: 10px;"
+									onclick='delSelectedMismatchStandard(this)'
+									rel="similarStandard_page" class='btn btn-success btn-sm'>删除所选</button>
+								<button type="button" class="btn btn-info btn-sm pull-right btn_Close">返回</button>
+							</div>
+							<div class="box-content">
+								<table class="table dataTable productList"
+									page="similarStandard_page">
+									<thead>
+										<tr>
+											<th style="padding-left: 10px;"><input type='checkbox'
+												class='mismatchStandards' />全选</th>
+											<th class='col-sm-2'>商品名称</th>
+											<th class='col-sm-1'>来源网站</th>
+											<th class='col-sm-3'>网址</th>
+											<th class='col-sm-4'>不匹配内容</th>
+											<th class='col-sm-1'>操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td colspan="6" style="text-align: center;">暂无数据</td>
+										</tr>
+									</tbody>
+								</table>
+								<input type="hidden" id="hid_similarStandard" />
+								<div class="productPaging">
+									<ul class="pagination pagination-centered"
+										style="margin-left: 10px;">
+										<li><a class="firstPage">首页</a></li>
+										<li><a class="previousPage">前一页</a></li>
+										<li><a class="pageIndex">1</a></li>
+
+										<li><a class="nextPage">后一页</a></li>
+										<li><a class="endPage">尾页</a></li>
+
+									</ul>
+									<div class="pull-right" style="margin: 20px">
+										共<span class="pageSpan pageCount">1</span>页，<span
+											class="pageSpan dataCount">0</span>条数据
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 跨境风险商品实时检测系统 -->
+			<div class="row standardWorldMap" style="display: block;">
+				<div class="box col-md-12">
+					<div class="box-inner">
+						<div class="box-header">
+							<h2 style="text-align: center;">
+								<i class="glyphicon glyphicon-globe"></i>&nbsp;&nbsp;跨境风险商品实时检测系统
+							</h2>
+						</div>
+						<div class="box-content">
+							<div id="standardMap" style="height: 500px;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 显示数据总量 -->
+			<div id="standardGroup" class="row" style="display: block;">
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 ">
+					<div class="databox bg-fifth">
+						<div class="databox-left bg-fifthTheme">
+							<div class="databox-piechart">
+								<span class="glyphicon glyphicon-align-left"></span>
+							</div>
+						</div>
+						<div class="databox-right">
+							<div class='standardData'>
+								<span class="databox-number font-fifth" id="standardWebsiteNum">0</span>
+								<div class="databox-text">网站数量</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 ">
+					<div class="databox bg-second">
+						<div class="databox-left bg-secondTheme">
+							<div class="databox-piechart">
+								<span class="glyphicon glyphicon-signal"></span>
+							</div>
+						</div>
+						<div class="databox-right">
+							<div class='standardData'>
+								<span class="databox-number font-second"
+									id="stanndardProductNum">0</span>
+								<div class="databox-text">商品数量</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+					<div class="databox bg-third">
+						<div class="databox-left bg-thirdTheme">
+							<div class="databox-piechart">
+								<span class="glyphicon glyphicon-list-alt"></span>
+							</div>
+						</div>
+						<div class="databox-right">
+							<div class='standardData'>
+								<span class="databox-number font-third" id="standardNum">3</span>
+								<div class="databox-text">标准</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+					<div class="databox bg-forth">
+						<div class="databox-left bg-forthTheme">
+							<div class="databox-piechart">
+								<span class="glyphicon glyphicon-file"></span>
+							</div>
+						</div>
+						<div class="databox-right">
+							<div class='standardData'>
+								<span class="databox-number font-forth" id="misMatchProductNum">0</span>
+								<div class="databox-text">风险商品数量</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="realTimeMonitoring_page" class="content-hide"
+				style="display: block;">
+				<div class="row">
+					<div class="box col-md-12">
+						<div class="box-inner">
+							<div class="box-content">
+								<table class="table dataTable productList"
+									page="realTimeMonitoring_page">
+									<thead>
+										<tr>
+											<th class='col-sm-2'>时间</th>
+											<th class='col-sm-4'>商品名称</th>
+											<th class='col-sm-2'>规则</th>
+											<th class='col-sm-4'>风险项</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td colspan="4" style="text-align: center;">暂无数据</td>
+										</tr>
+									</tbody>
+								</table>
+								<!-- 暂时不需要翻页，后期可能修改 -->	
+							<div class="productPaging">
+								<ul class="pagination pagination-centered" style="margin-left:10px;">
+									<li><a class="firstPage">首页</a></li>
+									<li><a class="previousPage">前一页</a></li>
+									<li><a class="pageIndex">1</a></li>
+
+									<li><a class="nextPage">后一页</a></li>
+									<li><a class="endPage">尾页</a></li>
+
+								</ul>
+								<div class="pull-right" style="margin:20px">
+									共<span class="pageSpan pageCount">1</span>页，<span class="pageSpan dataCount">0</span>条数据
+								</div>
+							</div> 
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row worldMap">
+				<div class="box col-md-12">
+					<div class="box-inner">
+						<div class="box-header well">
+							<h2>
+								<i class="glyphicon glyphicon-globe"></i>&nbsp;&nbsp;舆情全球分布详情
+							</h2>
+							<span class="pull-right" style="font-size: 14px;"
+								id='btn_ExcelData'> &nbsp;&nbsp;<a
+								onclick="viewExcelFormDatum()">查看表格数据</a></span> <span
+								class="pull-right" style="font-size: 14px;" id='btn_MapData'>
+								&nbsp;&nbsp;<a onclick="viewWorldFormDatum()">查看地图数据</a>
+							</span> <span class="pull-right" style="font-size: 14px;"
+								id='btn_returnWorldMapData'> &nbsp;&nbsp;<a href="#"
+								id="backWorld">返回世界地图</a></span>
+							<!--<span class="pull-right"
+                                    style="font-size: 14px;"><a onclick="modeSwitchMap()">切换地图模式</a></span>-->
+						</div>
+						<input id="hid_viewShow" type="hidden" value="0" />
+						<div class="box-content">
+							<div id="EventsExcelShow" class="excelShow">
+								<table cellpadding="0" cellspacing="0" border="0"
+									class="display" style="width: 100%">
+									<thead>
+										<tr>
+											<th style="width: 40%">商品名称</th>
+											<th style="width: 15%">来源网站</th>
+											<th style="width: 30%">网站路径</th>
+											<th style="width: 15%">事件名称</th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+							<div id="DetectingsExcelShow" class="excelShow">
+								<table cellpadding="0" cellspacing="0" border="0"
+									class="display" style="width: 100%">
+									<thead>
+										<tr>
+											<th>商品名称</th>
+											<th>网站名称</th>
+											<th>网站路径</th>
+											<th>来源类型</th>
+											<th>来源内容</th>
+											<th>商品品牌</th>
+											<th>商品产地</th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+							<div id="WebsitesExcelShow" class="excelShow">
+								<table cellpadding="0" cellspacing="0" border="0"
+									class="display" style="width: 100%">
+									<thead>
+										<tr>
+											<th>网站名</th>
+											<th>网址</th>
+											<th>网站类型</th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+							<div id="ProductsExcelShow" class="excelShow">
+								<table cellpadding="0" cellspacing="0" border="0"
+									class="display" style="width: 100%">
+									<thead>
+										<tr>
+											<th>商品名</th>
+											<th>网站</th>
+											<th>商品网址</th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+							<div id="ProductTypeExcelShow" class="excelShow">
+								<table cellpadding="0" cellspacing="0" border="0"
+									class="display" style="width: 100%">
+									<thead>
+										<tr>
+											<th>商品分类名称</th>
+											<th>备注</th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+							<div id="BrandExcelShow" class="excelShow">
+								<table cellpadding="0" cellspacing="0" border="0"
+									class="display" style="width: 100%">
+									<thead>
+										<tr>
+											<th>品牌(中文)</th>
+											<th>品牌(英文)</th>
+											<th>品牌所属地</th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+							<div id="ProductDefineExcelShow" class="excelShow">
+								<table cellpadding="0" cellspacing="0" border="0"
+									class="display" style="width: 100%">
+									<thead>
+										<tr>
+											<th>产品名称</th>
+											<th>产品包装</th>
+											<th>其他信息</th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+							<div id="main" style="height: 500px;"></div>
+							<div id="map_canvas" style="height: 500px; display: none;">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class='clearFloatLeft'></div>
+	<input id="hid_pageStatus" value="0" type="hidden" />
+	<!--
+	<div class="selectBox">
+		<div class="selectBox-title">商品类别    </div>
+	</div>-->
+	
+	<div id="messgeBox">
+        <div class="mbTitle">消息</div>
+        <div class="mbContent">
+        </div>
+    </div>
+    <div id="bg">
+    </div>
+</body>
+</html>

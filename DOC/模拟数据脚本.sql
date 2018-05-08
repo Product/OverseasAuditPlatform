@@ -1,0 +1,143 @@
+delete from COUNTRYREGION;
+delete from NewsGather;
+delete from NEWSGATHERTASK;
+delete from NEWSGATHERTASKITEMPATH;
+delete from NEWSGATHERTASKITEMPATH;
+delete from ARTICLE;
+delete from WEBSITE;
+delete from WEBSITESTYLE;
+delete from BRAND;
+delete from AREA;
+delete from REGION;
+delete from COUNTRY;
+delete from PRODUCTTYPE;
+delete from EVENTTYPE;
+
+SET IDENTITY_INSERT EVENTTYPE ON
+insert into EVENTTYPE(EVENTTYPEID,EVENTTYPENAME,TYPEAFFECT_AREA,TYPEAFFECT_WEBSITE,TYPEAFFECT_BRAND,TYPEAFFECT_PRODUCTTYPE) values
+(1,'疫情事件',0,1,0,1),
+(2,'网站事件',1,0,0,0),
+(3,'品牌事件',0,0,1,0),
+(4,'地域事件',0,1,0,1)
+SET IDENTITY_INSERT EVENTTYPE OFF
+
+
+insert into REGION (REGION_REGIONCODE, REGION_NAME)
+values('AS', '亚洲');
+insert into REGION (REGION_REGIONCODE, REGION_NAME)
+values('EU', '欧洲');
+insert into REGION (REGION_REGIONCODE, REGION_NAME)
+values('NA', '北美洲');
+insert into REGION(REGION_REGIONCODE, REGION_NAME)
+values('SA', '南美洲');
+insert into REGION(REGION_REGIONCODE, REGION_NAME)
+values('OC', '大洋洲');
+
+insert into COUNTRY(COUNTRY_COUNTRYCODE, COUNTRY_NAME)
+values('CN', '中国');
+insert into COUNTRY(COUNTRY_COUNTRYCODE, COUNTRY_NAME)
+values('JP', '日本');
+insert into COUNTRY(COUNTRY_COUNTRYCODE, COUNTRY_NAME)
+values('KR', '韩国');
+
+insert into COUNTRYREGION(COUNTRY_ID, REGION_ID)
+values(1, 1);
+insert into COUNTRYREGION(COUNTRY_ID, REGION_ID)
+values(2, 1);
+insert into COUNTRYREGION(COUNTRY_ID, REGION_ID)
+values(3, 1);
+
+insert into COUNTRY(COUNTRY_COUNTRYCODE, COUNTRY_NAME)
+values('XXL', '新西兰');
+insert into COUNTRY(COUNTRY_COUNTRYCODE, COUNTRY_NAME)
+values('ADL', '澳大利亚');
+
+insert into COUNTRYREGION(COUNTRY_ID, REGION_ID)
+values(4, 5);
+insert into COUNTRYREGION(COUNTRY_ID, REGION_ID)
+values(5, 5);
+
+insert into COUNTRY(COUNTRY_COUNTRYCODE, COUNTRY_NAME)
+values('HL', '荷兰');
+insert into COUNTRY(COUNTRY_COUNTRYCODE, COUNTRY_NAME)
+values('DG', '德国');
+insert into COUNTRY(COUNTRY_COUNTRYCODE, COUNTRY_NAME)
+values('YG', '英国');
+
+insert into COUNTRYREGION(COUNTRY_ID, REGION_ID)
+values(6, 2);
+insert into COUNTRYREGION(COUNTRY_ID, REGION_ID)
+values(7, 2);
+insert into COUNTRYREGION(COUNTRY_ID, REGION_ID)
+values(8, 2);
+
+insert into COUNTRY(COUNTRY_COUNTRYCODE, COUNTRY_NAME)
+values('US', '美国');
+insert into COUNTRY(COUNTRY_COUNTRYCODE, COUNTRY_NAME)
+values('JND', '加拿大');
+insert into COUNTRYREGION(COUNTRY_ID, REGION_ID)
+values(9, 3);
+insert into COUNTRYREGION(COUNTRY_ID, REGION_ID)
+values(10, 3);
+
+insert into AREA(AREA_AREACODE, AREA_NAME, COUNTRY)
+values('XG', '香港', 1);
+insert into AREA(AREA_AREACODE, AREA_NAME, COUNTRY)
+values('TW', '台湾', 1);
+
+
+insert into BRAND(BRAND_NAMECN, BRAND_NAMEEN, COUNTRY, POPULARITY, MARKET_SHARE, BRAND_CREATETIME)
+values('牛栏', 'Nutrilon', 6, cast(FLOOR(rand()*100) as int ), ceiling(rand()*100)*1.0/100, GETDATE());
+insert into BRAND(BRAND_NAMECN, BRAND_NAMEEN, COUNTRY, POPULARITY, MARKET_SHARE, BRAND_CREATETIME)
+values('美素', 'Hero Baby', 6, cast(FLOOR(rand()*100) as int ), ceiling(rand()*100)*1.0/100, GETDATE());
+insert into BRAND(BRAND_NAMECN, BRAND_NAMEEN, COUNTRY, POPULARITY, MARKET_SHARE, BRAND_CREATETIME)
+values('爱荷美', 'Ekobaby', 6, cast(FLOOR(rand()*100) as int ), ceiling(rand()*100)*1.0/100, GETDATE());
+insert into BRAND(BRAND_NAMECN, BRAND_NAMEEN, COUNTRY, POPULARITY, MARKET_SHARE, BRAND_CREATETIME)
+values('Karicare', 'Karicare', 4, cast(FLOOR(rand()*100) as int ), ceiling(rand()*100)*1.0/100, GETDATE());
+insert into BRAND(BRAND_NAMECN, BRAND_NAMEEN, COUNTRY, POPULARITY, MARKET_SHARE, BRAND_CREATETIME)
+values('爱他美', 'Aptamil', 4, cast(FLOOR(rand()*100) as int ), ceiling(rand()*100)*1.0/100, GETDATE());
+insert into BRAND(BRAND_NAMECN, BRAND_NAMEEN, COUNTRY, POPULARITY, MARKET_SHARE, BRAND_CREATETIME)
+values('喜宝', 'Hipp', 7, cast(FLOOR(rand()*100) as int ), ceiling(rand()*100)*1.0/100, GETDATE());
+insert into BRAND(BRAND_NAMECN, BRAND_NAMEEN, COUNTRY, POPULARITY, MARKET_SHARE, BRAND_CREATETIME)
+values('特福芬', 'Topfer', 7, cast(FLOOR(rand()*100) as int ), ceiling(rand()*100)*1.0/100, GETDATE());
+insert into BRAND(BRAND_NAMECN, BRAND_NAMEEN, COUNTRY, POPULARITY, MARKET_SHARE, BRAND_CREATETIME)
+values('雅培', 'Similac', 9, cast(FLOOR(rand()*100) as int ), ceiling(rand()*100)*1.0/100, GETDATE());
+insert into BRAND(BRAND_NAMECN, BRAND_NAMEEN, COUNTRY, POPULARITY, MARKET_SHARE, BRAND_CREATETIME)
+values('美赞臣', 'Enfagrow', 9, cast(FLOOR(rand()*100) as int ), ceiling(rand()*100)*1.0/100, GETDATE());
+insert into BRAND(BRAND_NAMECN, BRAND_NAMEEN, COUNTRY, POPULARITY, MARKET_SHARE, BRAND_CREATETIME)
+values('贝拉米', 'Bellamy', 5, cast(FLOOR(rand()*100) as int ), ceiling(rand()*100)*1.0/100, GETDATE());
+insert into BRAND(BRAND_NAMECN, BRAND_NAMEEN, COUNTRY, POPULARITY, MARKET_SHARE, BRAND_CREATETIME)
+values('美可卓', 'Maxigenes', 5, cast(FLOOR(rand()*100) as int ), ceiling(rand()*100)*1.0/100, GETDATE());
+insert into BRAND(BRAND_NAMECN, BRAND_NAMEEN, COUNTRY, POPULARITY, MARKET_SHARE, BRAND_CREATETIME)
+values('惠氏', 'SMA', 8, cast(FLOOR(rand()*100) as int ), ceiling(rand()*100)*1.0/100, GETDATE());
+insert into BRAND(BRAND_NAMECN, BRAND_NAMEEN, COUNTRY, POPULARITY, MARKET_SHARE, BRAND_CREATETIME)
+values('完达山', 'Wandashan', 1, cast(FLOOR(rand()*100) as int ), ceiling(rand()*100)*1.0/100, GETDATE());
+insert into BRAND(BRAND_NAMECN, BRAND_NAMEEN, COUNTRY, POPULARITY, MARKET_SHARE, BRAND_CREATETIME)
+values('雅士利', 'Yashily', 1, cast(FLOOR(rand()*100) as int ), ceiling(rand()*100)*1.0/100, GETDATE());
+insert into BRAND(BRAND_NAMECN, BRAND_NAMEEN, COUNTRY, POPULARITY, MARKET_SHARE, BRAND_CREATETIME)
+values('伊利', 'Yili', 1, cast(FLOOR(rand()*100) as int ), ceiling(rand()*100)*1.0/100, GETDATE());
+insert into BRAND(BRAND_NAMECN, BRAND_NAMEEN, COUNTRY, POPULARITY, MARKET_SHARE, BRAND_CREATETIME)
+values('花王', 'Merries', 2, cast(FLOOR(rand()*100) as int ), ceiling(rand()*100)*1.0/100, GETDATE());
+insert into BRAND(BRAND_NAMECN, BRAND_NAMEEN, COUNTRY, POPULARITY, MARKET_SHARE, BRAND_CREATETIME)
+values('大王', 'GOO.N', 2, cast(FLOOR(rand()*100) as int ), ceiling(rand()*100)*1.0/100, GETDATE());
+insert into BRAND(BRAND_NAMECN, BRAND_NAMEEN, COUNTRY, POPULARITY, MARKET_SHARE, BRAND_CREATETIME)
+values('日东', 'lldong', 3, cast(FLOOR(rand()*100) as int ), ceiling(rand()*100)*1.0/100, GETDATE());
+insert into BRAND(BRAND_NAMECN, BRAND_NAMEEN, COUNTRY, POPULARITY, MARKET_SHARE, BRAND_CREATETIME)
+values('美赞臣', 'Enfamil', 10, cast(FLOOR(rand()*100) as int ), ceiling(rand()*100)*1.0/100, GETDATE());
+insert into BRAND(BRAND_NAMECN, BRAND_NAMEEN, COUNTRY,AREA, POPULARITY, MARKET_SHARE, BRAND_CREATETIME)
+values('惠氏启赋', 'illuma', 1, 1, cast(FLOOR(rand()*100) as int ), ceiling(rand()*100)*1.0/100, GETDATE());
+insert into BRAND(BRAND_NAMECN, BRAND_NAMEEN, COUNTRY,AREA, POPULARITY, MARKET_SHARE, BRAND_CREATETIME)
+values('亚培', 'Abbott', 1, 1, cast(FLOOR(rand()*100) as int ), ceiling(rand()*100)*1.0/100, GETDATE());
+
+insert into WEBSITESTYLE(WEBSITESTYLE_NAME, WEBSITESTYLE_CREATETIME, WEBSITESTYLE_REMARK, WEBSITESTYLE_CREATEPERSON)
+values('海淘网站', GETDATE(), '', 1);
+
+insert into WEBSITE(WEBSITE_NAME, WEBSITE_STYLE, WEBSITE_ADDRESS, WEBSITE_CREATETIME, LOCATION, INTEGRITY_DEGREE, COMPREHENSIVE_SCORE, WEBSITE_REMARK, REGULATORY, WEBSITE_CREATEPERSON)
+values('麦乐购', 1, '中国', GETDATE(), 'http://www.m6go.com/', 60, 70, '', 1, 1);
+
+insert into PRODUCTTYPE(PRODUCTTYPE_LEVEL, PRODUCTTYPE_NAME, PRODUCTTYPE_PTID, PRODUCTTYPE_REMARK, PRODUCTTYPE_USERINFO, PRODUCTTYPE_CREATETIME)
+values(1, '食品', 0, '', 1, GETDATE());
+insert into PRODUCTTYPE(PRODUCTTYPE_LEVEL, PRODUCTTYPE_NAME, PRODUCTTYPE_PTID, PRODUCTTYPE_REMARK, PRODUCTTYPE_USERINFO, PRODUCTTYPE_CREATETIME)
+values(2, '母婴', 1, '', 1, GETDATE());
+insert into PRODUCTTYPE(PRODUCTTYPE_LEVEL, PRODUCTTYPE_NAME, PRODUCTTYPE_PTID, PRODUCTTYPE_REMARK, PRODUCTTYPE_USERINFO, PRODUCTTYPE_CREATETIME)
+values(3, '奶粉', 2, '', 1, GETDATE());
